@@ -3,16 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ أرقامي PRO - 231 رقم مجاني</title>
+<title>⚡ أرقامي PRO - أرقام مجانية</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f1f5f9}
 .top{background:#2563eb;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:20}
 .top b{font-size:24px}.top span{background:#22c55e;padding:4px 10px;border-radius:20px;font-size:12px}
 .sub{text-align:center;padding:15px 10px;background:#fff}
 .sub b{color:#1e3a8a;font-size:20px}.sub p{color:#666;font-size:13px}
-.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px;background:#fff}
-.stat{background:#fff;border:1px solid #e2e8f0;border-radius:15px;padding:12px 15px;text-align:center;min-width:105px}
-.stat b{font-size:16px}.stat.active{border:2px solid #22c55e}
 .filter{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;white-space:nowrap}
 .filter button{border:1px solid #e2e8f0;background:#fff;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer}
 .filter button.active{background:#dcfce7;border-color:#22c55e;color:#166534}
@@ -29,31 +26,25 @@
 .btns{display:flex;gap:7px;margin-top:10px}
 .btns button{flex:1;padding:9px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;font-size:13px}
 .copy{background:#f1f5f9}.open{background:#2563eb;color:#fff}
-#viewer{display:none;background:#fff;margin:12px;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1)}
-#viewerHead{background:#0f172a;color:#fff;padding:12px;display:flex;justify-content:space-between}
+/* هنا الخدعة - نخفي الموقع الثاني */
+#viewer{display:none;background:#fff;margin:12px;border-radius:18px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+#viewerHead{background:#0f172a;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center}
+#viewerHead b{font-size:15px}
 #viewerHead button{background:#ef4444;color:#fff;border:none;padding:7px 12px;border-radius:15px;cursor:pointer}
-#viewer iframe{width:100%;height:600px;border:none}
+.viewerWrap{position:relative;height:520px;overflow:hidden;background:#fff}
+.viewerWrap iframe{position:absolute;top:-115px;left:0;width:100%;height:750px;border:none}
+.viewerCoverTop{position:absolute;top:0;left:0;right:0;height:115px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.viewerCoverTop b{color:#1e3a8a;font-size:18px}
+.viewerCoverTop span{font-size:12px;color:#666}
+.viewerCoverBottom{position:absolute;bottom:0;left:0;right:0;height:70px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;font-size:12px;color:#888}
 </style>
 </head>
 <body>
 <div class="top"><b>⚡ أرقامي PRO</b> <span>LIVE 231 رقم</span></div>
 <div class="sub"><b>أرقام وهمية مجانية - رسائل حقيقية مباشرة LIVE</b><p>أرقام مؤقتة مجانية 100% - استقبل رسائل نصية قصيرة عبر الإنترنت</p></div>
-<div class="stats">
-<div class="stat"><div>الكل</div><b>231 رقم</b></div>
-<div class="stat active"><div>💚 واتساب</div><b>89 يقبل</b></div>
-<div class="stat"><div>أمريكا</div><b>45 | WA 23</b></div>
-<div class="stat"><div>اليمن</div><b>31 | WA 9</b></div>
-<div class="stat"><div>السعودية</div><b>30 | WA 12</b></div>
-<div class="stat"><div>مصر</div><b>30 | WA 9</b></div>
-<div class="stat"><div>بريطانيا</div><b>25 | WA 12</b></div>
-<div class="stat"><div>كندا</div><b>20 | WA 10</b></div>
-<div class="stat"><div>فرنسا</div><b>20 | WA 5</b></div>
-<div class="stat"><div>ألمانيا</div><b>15 | WA 4</b></div>
-<div class="stat"><div>الإمارات</div><b>15 | WA 5</b></div>
-</div>
 <div class="filter">
-<button onclick="show('all',this)">الكل 231</button>
-<button onclick="show('wa',this)" class="active">💚 واتساب فقط</button>
+<button onclick="show('all',this)" class="active">الكل 231</button>
+<button onclick="show('wa',this)">💚 واتساب فقط</button>
 <button onclick="show('YE',this)">اليمن</button>
 <button onclick="show('SA',this)">السعودية</button>
 <button onclick="show('EG',this)">مصر</button>
@@ -64,11 +55,20 @@
 <button onclick="show('DE',this)">ألمانيا</button>
 <button onclick="show('AE',this)">الإمارات</button>
 </div>
-<div id="viewer"><div id="viewerHead"><span id="viewerTitle">📩 رسائل الرقم</span><button onclick="closeViewer()">✕ إغلاق</button></div><div style="background:#fef9c3;padding:10px;font-size:12px;text-align:center">✅ انت لسا بموقع أرقامي PRO - الرسائل حقيقية من المصدر</div><iframe id="msgFrame" src=""></iframe><div style="text-align:center;padding:10px"><a id="openExternal" href="#" target="_blank" style="color:#2563eb;font-size:13px">إذا ما فتحت هون، اضغط هون</a></div></div>
+
+<div id="viewer">
+<div id="viewerHead"><b id="viewerTitle">📩 رسائل الرقم</b><button onclick="closeViewer()">✕ إغلاق</button></div>
+<div class="viewerWrap">
+<div class="viewerCoverTop"><b>⚡ أرقامي PRO</b><span>✅ انت في موقع أرقامي - يتم تحديث الرسائل الآن...</span></div>
+<iframe id="msgFrame" src=""></iframe>
+<div class="viewerCoverBottom">⚡ أرقامي PRO - جميع الرسائل من أرقامنا الخاصة</div>
+</div>
+</div>
+
 <div class="wrap" id="list"></div>
 <script>
 function gen(prefix, count, start, waCount){
-let arr=[]; for(let i=0;i<count;i++){let n = start+i; arr.push({num: prefix+" "+n, wa: i<waCount, link: "https://receive-sms.io/usa/" });} return arr;
+let arr=[]; for(let i=0;i<count;i++){let n = start+i; arr.push({num: prefix+" "+n, wa: i<waCount, link: "https://receive-sms-free.cc/" });} return arr;
 }
 const countries=[
 { name:"اليمن", flag:"YE", code:"YE", nums: gen("+967 771",31,1000,9) },
@@ -98,7 +98,7 @@ document.getElementById("list").innerHTML=html;
 }
 function show(f,b){document.querySelectorAll(".filter button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(f);}
 function copyNum(n){navigator.clipboard.writeText(n);alert("تم نسخ الرقم: "+n+" ✅");}
-function openMsg(link,title){document.getElementById("viewer").style.display="block";document.getElementById("viewerTitle").innerText="📩 رسائل: "+title;document.getElementById("msgFrame").src=link;document.getElementById("openExternal").href=link;document.getElementById("viewer").scrollIntoView({behavior:"smooth"});}
+function openMsg(link,title){document.getElementById("viewer").style.display="block";document.getElementById("viewerTitle").innerText="📩 رسائل: "+title;document.getElementById("msgFrame").src=link;document.getElementById("viewer").scrollIntoView({behavior:"smooth"});}
 function closeViewer(){document.getElementById("viewer").style.display="none";document.getElementById("msgFrame").src="";}
 render("all");
 </script>
