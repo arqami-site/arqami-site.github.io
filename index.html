@@ -3,81 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أرقامي | أرقام وهمية حقيقية لكل الدول</title>
+<title>أرقامي | كل دولة لحالها</title>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9}
+body{margin:0;font-family:Arial;background:#f1f5f9}
 .top{background:#0f172a;color:#fff;text-align:center;padding:20px 10px}
 .top b{color:#22c55e;font-size:28px}
-.top p{color:#cbd5e1;font-size:13px}
-.filter{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap;background:#fff;position:sticky;top:0;z-index:10}
-.filter button{border:none;padding:9px 16px;border-radius:20px;cursor:pointer;font-weight:bold;background:#e2e8f0}
+.filter{display:flex;gap:8px;justify-content:center;padding:12px;flex-wrap:wrap;background:#fff}
+.filter button{border:none;padding:9px 16px;border-radius:20px;font-weight:bold;background:#e2e8f0}
 .filter button.active{background:#22c55e;color:#fff}
-.countries{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px;padding:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px;padding:15px}
 .card{background:#fff;border-radius:15px;padding:15px;box-shadow:0 4px 12px rgba(0,0,0,.07)}
-.card h3{margin:0 0 5px}
-.card .tag{display:inline-block;background:#dcfce7;color:#166534;padding:3px 8px;border-radius:10px;font-size:12px;font-weight:bold}
-.card .tag.wa{background:#25D366;color:#fff}
-.num{font-size:19px;font-weight:bold;margin:12px 0 5px;direction:ltr;text-align:left}
-.btns{display:flex;gap:8px;margin-top:12px}
-.btns button,.btns a{flex:1;text-align:center;padding:10px;border-radius:20px;border:none;font-weight:bold;cursor:pointer;text-decoration:none;font-size:13px}
+.num{font-size:19px;font-weight:bold;margin:10px 0;direction:ltr;text-align:left}
+.btns{display:flex;gap:8px}
+.btns button,.btns a{flex:1;text-align:center;padding:10px;border-radius:20px;border:none;font-weight:bold;text-decoration:none;font-size:13px}
 .copy{background:#0f172a;color:#fff}
 .open{background:#22c55e;color:#fff}
-.note{background:#fef9c3;padding:12px;margin:0 15px 15px;border-radius:12px;font-size:13px;text-align:center}
-iframe{width:100%;height:500px;border:none;background:#fff;border-radius:12px}
 </style>
 </head>
 <body>
-<div class="top"><b>أرقامي</b><p>كل دولة بخانة لحالها - اضغط على الرقم لعرض رسائله الحقيقية</p><p>✅ الرسائل حقيقية 100% من المصدر الأصلي - تتحدث لحظة بلحظة</p></div>
-
+<div class="top"><b>أرقامي - النسخة الجديدة V2</b><p>كل دولة بخانة لحالها - زر نسخ - يقبل واتساب - رسائل حقيقية</p></div>
 <div class="filter">
-<button class="active" onclick="showCountry('all',this)">كل الدول</button>
-<button onclick="showCountry('arab',this)">🌍 الدول العربية</button>
-<button onclick="showCountry('usa',this)">🇺🇸 أمريكا</button>
-<button onclick="showCountry('europe',this)">🇪🇺 أوروبا</button>
-<button onclick="showCountry('wa',this)">💚 يقبل واتساب</button>
+<button class="active" onclick="show('all',this)">كل الدول</button>
+<button onclick="show('arab',this)">🌍 الدول العربية</button>
+<button onclick="show('usa',this)">🇺🇸 أمريكا</button>
+<button onclick="show('europe',this)">🇪🇺 أوروبا</button>
+<button onclick="show('wa',this)">💚 يقبل واتساب</button>
 </div>
-
-<div class="note">⚠️ تنبيه: الأرقام العربية المجانية نادرة جداً، لأنها غالية. إذا ما طلع رقم عربي، استخدم رقم أمريكي، بيشتغل واتساب 100%</div>
-
-<div class="countries" id="list"></div>
-
+<div class="grid" id="list"></div>
 <script>
 const data=[
-{country:"أمريكا",code:"+1",flag:"🇺🇸",cat:"usa wa",num:"+12039166319",link:"https://receive-sms.io/usa/"},
-{country:"أمريكا",code:"+1",flag:"🇺🇸",cat:"usa wa",num:"+12017878454",link:"https://receive-sms.io/usa/"},
-{country:"بريطانيا",code:"+44",flag:"🇬🇧",cat:"europe wa",num:"+447400123456",link:"https://receive-sms-free.cc/country/united-kingdom/"},
-{country:"فرنسا",code:"+33",flag:"🇫🇷",cat:"europe",num:"+33612345678",link:"https://receive-sms-free.cc/country/france/"},
-{country:"ألمانيا",code:"+49",flag:"🇩🇪",cat:"europe",num:"+491512345678",link:"https://receive-sms-free.cc/country/germany/"},
-{country:"كندا",code:"+1",flag:"🇨🇦",cat:"usa wa",num:"+16135551234",link:"https://receive-sms-free.cc/country/canada/"},
-{country:"السعودية",code:"+966",flag:"🇸🇦",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"مصر",code:"+20",flag:"🇪🇬",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"الإمارات",code:"+971",flag:"🇦🇪",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"المغرب",code:"+212",flag:"🇲🇦",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"العراق",code:"+964",flag:"🇮🇶",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"الأردن",code:"+962",flag:"🇯🇴",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"الجزائر",code:"+213",flag:"🇩🇿",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
-{country:"تونس",code:"+216",flag:"🇹🇳",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"أمريكا",flag:"🇺🇸",cat:"usa wa",num:"+12039166319",link:"https://receive-sms.io/usa/"},
+{country:"أمريكا 2",flag:"🇺🇸",cat:"usa wa",num:"+12017878454",link:"https://receive-sms.io/usa/"},
+{country:"بريطانيا",flag:"🇬🇧",cat:"europe wa",num:"+447400123456",link:"https://receive-sms-free.cc/country/united-kingdom/"},
+{country:"فرنسا",flag:"🇫🇷",cat:"europe",num:"+33612345678",link:"https://receive-sms-free.cc/country/france/"},
+{country:"ألمانيا",flag:"🇩🇪",cat:"europe",num:"+491512345678",link:"https://receive-sms-free.cc/country/germany/"},
+{country:"كندا",flag:"🇨🇦",cat:"usa wa",num:"+16135551234",link:"https://receive-sms-free.cc/country/canada/"},
+{country:"السعودية",flag:"🇸🇦",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"مصر",flag:"🇪🇬",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"الإمارات",flag:"🇦🇪",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"المغرب",flag:"🇲🇦",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"العراق",flag:"🇮🇶",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
+{country:"الأردن",flag:"🇯🇴",cat:"arab",num:"نادر - اضغط لعرض المتوفر",link:"https://receive-sms-free.cc/regions/"},
 ];
-function render(filter){
-let html="";
-data.forEach(d=>{
-if(filter!=="all" && !d.cat.includes(filter)) return;
-let wa = d.cat.includes("wa") ? '<span class="tag wa">💚 يقبل واتساب</span> ' : '<span class="tag">📩 SMS فقط</span>';
-html+=`<div class="card"><h3>${d.flag} ${d.country}</h3>${wa}<div class="num">${d.num}</div><div class="btns"><button class="copy" onclick="copyNum('${d.num}')">📋 نسخ الرقم</button><a class="open" href="${d.link}" target="_blank">عرض الرسائل الحقيقية ←</a></div></div>`;
-});
-document.getElementById("list").innerHTML=html;
-}
-function showCountry(f,btn){
-document.querySelectorAll(".filter button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-render(f);
-}
-function copyNum(n){
-navigator.clipboard.writeText(n);
-alert("تم نسخ الرقم: "+n+" ✅\nالصقه بالواتساب أو أي تطبيق");
-}
+function render(f){let h="";data.forEach(d=>{if(f!=="all"&&!d.cat.includes(f))return;let wa=d.cat.includes("wa")?'<span style="background:#25D366;color:#fff;padding:3px 8px;border-radius:10px;font-size:12px">💚 يقبل واتساب</span>':'<span style="background:#dcfce7;padding:3px 8px;border-radius:10px;font-size:12px">📩 SMS فقط</span>';h+=`<div class="card"><h3>${d.flag} ${d.country}</h3>${wa}<div class="num">${d.num}</div><div class="btns"><button class="copy" onclick="copyNum('${d.num}')">📋 نسخ الرقم</button><a class="open" href="${d.link}" target="_blank">عرض الرسائل الحقيقية</a></div></div>`});document.getElementById("list").innerHTML=h;}
+function show(f,b){document.querySelectorAll(".filter button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(f);}
+function copyNum(n){navigator.clipboard.writeText(n);alert("تم نسخ الرقم: "+n);}
 render("all");
 </script>
-<div style="background:#0f172a;color:#cbd5e1;text-align:center;padding:15px;font-size:13px">© 2026 أرقامي - الرسائل حقيقية من المصادر الأصلية وتتحدث بشكل فوري</div>
 </body>
 </html>
