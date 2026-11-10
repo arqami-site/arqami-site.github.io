@@ -10,7 +10,7 @@ body{margin:0;font-family:Arial, sans-serif;background:#f1f5f9;text-align:center
 .ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
 .box{background:#fff;margin:12px auto;max-width:600px;border-radius:16px;padding:15px;text-align:right;box-shadow: 0 2px 4px rgba(0,0,0,0.05)}
 .num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:10px 12px;border-radius:10px;margin:8px 0;flex-wrap:wrap;gap:8px;}
-.num{font-size:18px;font-weight:bold;direction:ltr;color:#0f172a;}
+.num{font-size:18px;font-weight:bold;direction:ltr;unicode-bidi:embed;color:#0f172a;}
 .btn-group{display:flex;gap:5px;}
 button{background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;font-weight:bold;font-size:14px;border:none;cursor:pointer;transition:background 0.2s}
 button:hover{background:#1d4ed8}
@@ -19,12 +19,11 @@ button:hover{background:#1d4ed8}
 .inbox-btn{background:#7c3aed}
 .inbox-btn:hover{background:#6d28d9}
 
-/* تصميم صندوق الرسائل المباشر داخل الموقع */
 .modal {display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);}
 .modal-content {background-color: #fefefe; margin: 10% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; text-align: right; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
 .close {color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer;}
 .close:hover {color: black;}
-.msg-item {background: #f1f5f9; padding: 10px; border-radius: 8px; margin: 8px 0; border-right: 4px solid #2563eb;}
+.msg-item {background: #f1f5f9; padding: 10px; border-radius: 8px; margin: 8px 0; border-right: 4px solid #2563eb; text-align: right;}
 .msg-sender {font-weight: bold; font-size: 13px; color: #2563eb;}
 .msg-text {font-size: 15px; margin: 5px 0; color: #334155;}
 .msg-time {font-size: 11px; color: #64748b;}
@@ -42,14 +41,11 @@ button:hover{background:#1d4ed8}
     <p>جاري تحميل الأرقام والرسائل الحية...</p>
 </div>
 
-<!-- نافذة الرسائل الواردة المصممة خصيصاً لموقعك -->
 <div id="inboxModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeInbox()">&times;</span>
-    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b;">صندوق الرسائل الواردة</h3>
-    <div id="messagesList">
-        <!-- الرسائل ستظهر هنا -->
-    </div>
+    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b; direction:rtl;">صندوق الرسائل الواردة</h3>
+    <div id="messagesList"></div>
   </div>
 </div>
 
@@ -58,7 +54,6 @@ button:hover{background:#1d4ed8}
 <script>
 let globalNumbersData = [];
 
-// جلب الأرقام والرسائل من ملف numbers.json
 fetch('numbers.json')
     .then(response => response.json())
     .then(data => {
@@ -81,7 +76,7 @@ fetch('numbers.json')
             
             let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
             
-            group.items.forEach((numObj, index) => {
+            group.items.forEach((numObj) => {
                 let msgCount = numObj.messages ? numObj.messages.length : 0;
                 html += `
                 <div class="num-container">
@@ -112,7 +107,7 @@ function copyNumber(num) {
 function openInbox(phoneNumber) {
     let targetNum = globalNumbersData.find(n => n.number === phoneNumber);
     let msgListDiv = document.getElementById('messagesList');
-    document.getElementById('modalNumberTitle').innerText = `الرسائل الواردة للرقم: ${phoneNumber}`;
+    document.getElementById('modalNumberTitle.innerText' || 'modalNumberTitle').innerHTML = `الرسائل الواردة للرقم: <span style="direction:ltr; display:inline-block;">${phoneNumber}</span>`;
     
     msgListDiv.innerHTML = '';
     
