@@ -3,112 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arqami PRO - أرقام متجددة</title>
+<title>أرقامي PRO - استقبال رسائل الواتساب</title>
 <style>
 body{margin:0;font-family:Arial, sans-serif;background:#f1f5f9;text-align:center}
 .top{background:#2563eb;color:#fff;padding:15px;font-size:22px;font-weight:bold}
 .ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
 .box{background:#fff;margin:12px auto;max-width:600px;border-radius:16px;padding:15px;text-align:right;box-shadow: 0 2px 4px rgba(0,0,0,0.05)}
-.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:8px 12px;border-radius:10px;margin:8px 0;flex-wrap:wrap;gap:8px;}
-.num{font-size:18px;font-weight:bold;direction:ltr;}
+.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:10px 12px;border-radius:10px;margin:8px 0;flex-wrap:wrap;gap:8px;}
+.num{font-size:18px;font-weight:bold;direction:ltr;color:#0f172a;}
 .btn-group{display:flex;gap:5px;}
-button, a.action-btn{background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;border:none;cursor:pointer;transition:background 0.2s}
-button:hover, a.action-btn:hover{background:#1d4ed8}
+button{background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;font-weight:bold;font-size:14px;border:none;cursor:pointer;transition:background 0.2s}
+button:hover{background:#1d4ed8}
 .copy-btn{background:#10b981}
 .copy-btn:hover{background:#059669}
 .inbox-btn{background:#7c3aed}
 .inbox-btn:hover{background:#6d28d9}
 
+/* تصميم صندوق الرسائل المباشر داخل الموقع */
 .modal {display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);}
-.modal-content {background-color: #fefefe; margin: 5% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 600px; height: 80%; display: flex; flex-direction: column;}
-.close {color: #aaa; align-self: flex-end; font-size: 28px; font-weight: bold; cursor: pointer;}
+.modal-content {background-color: #fefefe; margin: 10% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; text-align: right; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+.close {color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer;}
 .close:hover {color: black;}
-iframe {width: 100%; height: 100%; border: none; border-radius: 8px; background: #fff;}
+.msg-item {background: #f1f5f9; padding: 10px; border-radius: 8px; margin: 8px 0; border-right: 4px solid #2563eb;}
+.msg-sender {font-weight: bold; font-size: 13px; color: #2563eb;}
+.msg-text {font-size: 15px; margin: 5px 0; color: #334155;}
+.msg-time {font-size: 11px; color: #64748b;}
+
 .toast {position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 8px; display: none; font-size: 14px; z-index: 2000;}
 </style>
 </head>
 <body>
 
-<div class="top">⚡ أرقامي PRO - رسائل مباشرة</div>
+<div class="top">⚡ أرقامي PRO - رسائل مباشرة وحصرية</div>
 <div class="ad">📢 إعلان - مساحة إعلانية</div>
-<h3>أحدث الأرقام المجانية لاستقبال رسائل الواتساب</h3>
+<h3>أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</h3>
 
 <div id="numbers-container">
-    <!-- الأرقام ستعرض هنا مباشرة -->
+    <p>جاري تحميل الأرقام والرسائل الحية...</p>
 </div>
 
-<!-- نافذة عرض الرسائل -->
+<!-- نافذة الرسائل الواردة المصممة خصيصاً لموقعك -->
 <div id="inboxModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeInbox()">&times;</span>
-    <h3 style="margin: 0 0 10px 0; text-align:right;">صندوق الوارد المباشر</h3>
-    <iframe id="inboxFrame" src=""></iframe>
+    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b;">صندوق الرسائل الواردة</h3>
+    <div id="messagesList">
+        <!-- الرسائل ستظهر هنا -->
+    </div>
   </div>
 </div>
 
 <div id="toast" class="toast">تم نسخ الرقم بنجاح!</div>
 
 <script>
-// بيانات الأرقام مباشرة داخل الكود لضمان عملها فوراً دون أخطاء
-const siteData = {
-  "numbers": [
-    {
-      "country": "اليمن",
-      "flag": "🇾🇪",
-      "number": "+967 771 1000",
-      "source_url": "https://receive-sms.io/yemen-phone-number/+9677711000"
-    },
-    {
-      "country": "السعودية",
-      "flag": "🇸🇦",
-      "number": "+966 55 1000000",
-      "source_url": "https://receive-smss.com/sms/+966551000000"
-    },
-    {
-      "country": "مصر",
-      "flag": "🇪🇬",
-      "number": "+20 10 10000000",
-      "source_url": "https://smss.net/egypt-phone-number/+201010000000"
-    }
-  ]
-};
+let globalNumbersData = [];
 
-function renderNumbers() {
-    let container = document.getElementById('numbers-container');
-    container.innerHTML = '';
-    
-    let grouped = {};
-    siteData.numbers.forEach(item => {
-        if (!grouped[item.country]) {
-            grouped[item.country] = { flag: item.flag, items: [] };
-        }
-        grouped[item.country].items.push(item);
-    });
-
-    for (let country in grouped) {
-        let group = grouped[country];
-        let box = document.createElement('div');
-        box.className = 'box';
+// جلب الأرقام والرسائل من ملف numbers.json
+fetch('numbers.json')
+    .then(response => response.json())
+    .then(data => {
+        globalNumbersData = data.numbers;
+        let container = document.getElementById('numbers-container');
+        container.innerHTML = '';
         
-        let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
-        
-        group.items.forEach(numObj => {
-            html += `
-            <div class="num-container">
-                <span class="num">${numObj.number}</span>
-                <div class="btn-group">
-                    <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
-                    <button class="inbox-btn" onclick="openInbox('${numObj.source_url}')">عرض الرسائل هنا</button>
-                </div>
-            </div>`;
+        let grouped = {};
+        data.numbers.forEach(item => {
+            if (!grouped[item.country]) {
+                grouped[item.country] = { flag: item.flag, items: [] };
+            }
+            grouped[item.country].items.push(item);
         });
-        
-        box.innerHTML = html;
-        container.appendChild(box);
-    }
-}
 
-renderNumbers();
+        for (let country in grouped) {
+            let group = grouped[country];
+            let box = document.createElement('div');
+            box.className = 'box';
+            
+            let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
+            
+            group.items.forEach((numObj, index) => {
+                let msgCount = numObj.messages ? numObj.messages.length : 0;
+                html += `
+                <div class="num-container">
+                    <span class="num">${numObj.number}</span>
+                    <div class="btn-group">
+                        <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
+                        <button class="inbox-btn" onclick="openInbox('${numObj.number}')">عرض الرسائل (${msgCount})</button>
+                    </div>
+                </div>`;
+            });
+            
+            box.innerHTML = html;
+            container.appendChild(box);
+        }
+    })
+    .catch(error => {
+        document.getElementById('numbers-container').innerHTML = '<p>جاري تحديث البيانات تلقائياً، يرجى تحديث الصفحة بعد قليل.</p>';
+    });
 
 function copyNumber(num) {
     navigator.clipboard.writeText(num).then(() => {
@@ -118,14 +109,32 @@ function copyNumber(num) {
     });
 }
 
-function openInbox(url) {
-    document.getElementById('inboxFrame').src = url;
+function openInbox(phoneNumber) {
+    let targetNum = globalNumbersData.find(n => n.number === phoneNumber);
+    let msgListDiv = document.getElementById('messagesList');
+    document.getElementById('modalNumberTitle').innerText = `الرسائل الواردة للرقم: ${phoneNumber}`;
+    
+    msgListDiv.innerHTML = '';
+    
+    if (targetNum && targetNum.messages && targetNum.messages.length > 0) {
+        targetNum.messages.forEach(msg => {
+            msgListDiv.innerHTML += `
+                <div class="msg-item">
+                    <div class="msg-sender">${msg.sender}</div>
+                    <div class="msg-text">${msg.text}</div>
+                    <div class="msg-time">${msg.time}</div>
+                </div>
+            `;
+        });
+    } else {
+        msgListDiv.innerHTML = '<p style="text-align:center; color:#64748b;">لا توجد رسائل جديدة على هذا الرقم حالياً.</p>';
+    }
+    
     document.getElementById('inboxModal').style.display = 'block';
 }
 
 function closeInbox() {
     document.getElementById('inboxModal').style.display = 'none';
-    document.getElementById('inboxFrame').src = '';
 }
 
 window.onclick = function(event) {
