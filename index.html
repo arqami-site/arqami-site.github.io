@@ -9,23 +9,25 @@ body{margin:0;font-family:Arial, sans-serif;background:#f1f5f9;text-align:center
 .top{background:#2563eb;color:#fff;padding:15px;font-size:22px;font-weight:bold}
 .ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
 .box{background:#fff;margin:12px auto;max-width:600px;border-radius:16px;padding:15px;text-align:right;box-shadow: 0 2px 4px rgba(0,0,0,0.05)}
-.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:10px 12px;border-radius:10px;margin:8px 0;flex-wrap:wrap;gap:8px;}
-.num{font-size:18px;font-weight:bold;direction:ltr;unicode-bidi:embed;color:#0f172a;}
-.btn-group{display:flex;gap:5px;}
-button{background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;font-weight:bold;font-size:14px;border:none;cursor:pointer;transition:background 0.2s}
-button:hover{background:#1d4ed8}
+
+.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:12px 15px;border-radius:10px;margin:10px 0;direction:ltr;}
+.num{font-size:18px;font-weight:bold;color:#0f172a;text-align:left;}
+.btn-group{display:flex;gap:6px;}
+
+button{padding:8px 12px;border-radius:8px;font-weight:bold;font-size:13px;border:none;cursor:pointer;color:#fff;transition:background 0.2s}
 .copy-btn{background:#10b981}
 .copy-btn:hover{background:#059669}
 .inbox-btn{background:#7c3aed}
 .inbox-btn:hover{background:#6d28d9}
 
 .modal {display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);}
-.modal-content {background-color: #fefefe; margin: 10% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; text-align: right; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
+.modal-content {background-color: #fefefe; margin: 15% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; text-align: right; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
 .close {color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer;}
 .close:hover {color: black;}
+
 .msg-item {background: #f1f5f9; padding: 10px; border-radius: 8px; margin: 8px 0; border-right: 4px solid #2563eb; text-align: right;}
 .msg-sender {font-weight: bold; font-size: 13px; color: #2563eb;}
-.msg-text {font-size: 15px; margin: 5px 0; color: #334155;}
+.msg-text {font-size: 15px; margin: 5px 0; color: #334155; direction: ltr; text-align: right;}
 .msg-time {font-size: 11px; color: #64748b;}
 
 .toast {position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 8px; display: none; font-size: 14px; z-index: 2000;}
@@ -35,16 +37,16 @@ button:hover{background:#1d4ed8}
 
 <div class="top">⚡ أرقامي PRO - رسائل مباشرة وحصرية</div>
 <div class="ad">📢 إعلان - مساحة إعلانية</div>
-<h3>أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</h3>
+<h3 style="padding: 0 10px;">أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</h3>
 
-<div id="numbers-container">
+<div id="numbers-container" style="padding: 0 10px;">
     <p>جاري تحميل الأرقام والرسائل الحية...</p>
 </div>
 
 <div id="inboxModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeInbox()">&times;</span>
-    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b; direction:rtl;">صندوق الرسائل الواردة</h3>
+    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b; direction:rtl; text-align:right;">صندوق الرسائل الواردة</h3>
     <div id="messagesList"></div>
   </div>
 </div>
@@ -54,7 +56,7 @@ button:hover{background:#1d4ed8}
 <script>
 let globalNumbersData = [];
 
-fetch('numbers.json')
+fetch('numbers.json?' + new Date().getTime())
     .then(response => response.json())
     .then(data => {
         globalNumbersData = data.numbers;
@@ -74,7 +76,7 @@ fetch('numbers.json')
             let box = document.createElement('div');
             box.className = 'box';
             
-            let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
+            let html = `<div style="text-align:right; font-weight:bold; margin-bottom:8px;">${group.flag} ${country} - أرقام متاحة للاستلام الفوري</div>`;
             
             group.items.forEach((numObj) => {
                 let msgCount = numObj.messages ? numObj.messages.length : 0;
@@ -83,7 +85,7 @@ fetch('numbers.json')
                     <span class="num">${numObj.number}</span>
                     <div class="btn-group">
                         <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
-                        <button class="inbox-btn" onclick="openInbox('${numObj.number}')">عرض الرسائل (${msgCount})</button>
+                        <button class="inbox-btn" onclick='openInbox(${JSON.stringify(numObj.number)})'>الرسائل (${msgCount})</button>
                     </div>
                 </div>`;
             });
@@ -107,7 +109,7 @@ function copyNumber(num) {
 function openInbox(phoneNumber) {
     let targetNum = globalNumbersData.find(n => n.number === phoneNumber);
     let msgListDiv = document.getElementById('messagesList');
-    document.getElementById('modalNumberTitle.innerText' || 'modalNumberTitle').innerHTML = `الرسائل الواردة للرقم: <span style="direction:ltr; display:inline-block;">${phoneNumber}</span>`;
+    document.getElementById('modalNumberTitle').innerHTML = `الرسائل الواردة للرقم: <span style="direction:ltr; display:inline-block;">${phoneNumber}</span>`;
     
     msgListDiv.innerHTML = '';
     
@@ -142,3 +144,4 @@ window.onclick = function(event) {
 
 </body>
 </html>
+
