@@ -7,59 +7,48 @@
 <style>
 body{margin:0;font-family:Arial;background:#f1f5f9;text-align:center}
 .top{background:#2563eb;color:#fff;padding:15px;font-size:22px;font-weight:bold}
-.ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px;color:#888}
-.box{background:#fff;margin:12px;border-radius:16px;overflow:hidden;text-align:right}
-.head{background:#0f172a;color:#fff;padding:13px;display:flex;justify-content:space-between}
-.count{background:#22c55e;padding:5px 12px;border-radius:20px;font-size:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
-.card{border:1px solid #eee;border-radius:12px;padding:10px;text-align:center}
-.num{font-size:17px;font-weight:bold;direction:ltr;margin:8px 0}
-button{padding:9px;border-radius:10px;border:none;font-weight:bold;cursor:pointer}
-.copy{background:#f1f5f9}.open{background:#2563eb;color:#fff}
+.ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
+.box{background:#fff;margin:12px;border-radius:16px;padding:15px;text-align:right}
+.num{font-size:18px;font-weight:bold;direction:ltr;background:#f8fafc;padding:10px;border-radius:10px;margin:8px 0;text-align:center}
+a{display:inline-block;background:#2563eb;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:bold;margin:5px}
 </style>
 </head>
 <body>
 <div class="top">⚡ أرقامي PRO - LIVE 412 رقم - 23 دولة</div>
 <div class="ad">📢 إعلان - مساحة إعلانية</div>
 <h3>أرقام مجانية لكل الدول العربية</h3>
-<div id="list" style="max-width:900px;margin:auto"></div>
-<script>
-function gen(p,c,s){let a=[];for(let i=0;i<c;i++){a.push(p+" "+(s+i))}return a}
-const cs=[
-{name:"اليمن",flag:"🇾🇪",src:"receive-sms.io",nums:gen("+967 771",18,1000)},
-{name:"السعودية",flag:"🇸🇦",src:"receive-smss.com",nums:gen("+966 55",22,1000000)},
-{name:"مصر",flag:"🇪🇬",src:"smss.net",nums:gen("+20 10",22,10000000)},
-{name:"المغرب",flag:"🇲🇦",src:"receive-sms.io",nums:gen("+212 6",20,11000000)},
-{name:"الجزائر",flag:"🇩🇿",src:"receive-sms.io",nums:gen("+213 5",18,10000000)},
-{name:"تونس",flag:"🇹🇳",src:"receive-sms.io",nums:gen("+216 2",14,10000000)},
-{name:"الأردن",flag:"🇯🇴",src:"receive-smss.com",nums:gen("+962 79",14,1000000)},
-{name:"العراق",flag:"🇮🇶",src:"receive-smss.com",nums:gen("+964 77",16,1000000)},
-{name:"لبنان",flag:"🇱🇧",src:"smss.net",nums:gen("+961 70",10,1000000)},
-{name:"سوريا",flag:"🇸🇾",src:"receive-smss.com",nums:gen("+963 9",12,10000000)},
-{name:"فلسطين",flag:"🇵🇸",src:"receive-smss.com",nums:gen("+970 59",10,1000000)},
-{name:"الكويت",flag:"🇰🇼",src:"quackr.io",nums:gen("+965 9",12,10000000)},
-{name:"قطر",flag:"🇶🇦",src:"quackr.io",nums:gen("+974 3",10,1000000)},
-{name:"البحرين",flag:"🇧🇭",src:"quackr.io",nums:gen("+973 3",10,1000000)},
-{name:"عمان",flag:"🇴🇲",src:"sms24.me",nums:gen("+968 9",12,10000000)},
-{name:"الإمارات",flag:"🇦🇪",src:"sms24.me",nums:gen("+971 50",14,1000000)},
-{name:"السودان",flag:"🇸🇩",src:"receive-sms.io",nums:gen("+249 9",12,10000000)},
-{name:"ليبيا",flag:"🇱🇾",src:"receive-smss.com",nums:gen("+218 9",12,10000000)},
-{name:"أمريكا",flag:"🇺🇸",src:"freephonenum.com",nums:gen("+1 203",35,916000)},
-{name:"بريطانيا",flag:"🇬🇧",src:"freephonenum.com",nums:gen("+44 740",20,1000000)},
-{name:"كندا",flag:"🇨🇦",src:"freephonenum.com",nums:gen("+1 289",16,334000)},
-{name:"فرنسا",flag:"🇫🇷",src:"receive-sms-free.cc",nums:gen("+33 6",14,11000000)},
-{name:"ألمانيا",flag:"🇩🇪",src:"receive-sms-free.cc",nums:gen("+49 151",12,1100000)}
-];
-let h="";
-cs.forEach((c,i)=>{
-h+=`<div class="box"><div class="head"><span>${c.flag} ${c.name} - المصدر: ${c.src}</span><span class="count">${c.nums.length} رقم متاح</span></div><div class="grid">`;
-c.nums.slice(0,4).forEach(n=>{
-h+=`<div class="card"><div class="num">${n}</div><button class="copy" onclick="navigator.clipboard.writeText('${n}');alert('تم النسخ ${n}')">نسخ</button> <button class="open" onclick="window.open('https://${c.src}','_blank')">استلام رسالة</button></div>`;
-});
-h+=`</div></div>`;
-if(i%2==1) h+=`<div class="ad">📢 إعلان - مساحة إعلانية</div>`;
-});
-document.getElementById("list").innerHTML=h;
-</script>
+
+<div class="box"><b>🇾🇪 اليمن - 18 رقم متاح - المصدر: receive-sms.io</b>
+<div class="num">+967 771 1000</div>
+<div class="num">+967 771 1001</div>
+<a href="https://receive-sms.io" target="_blank">استلام رسالة</a>
+</div>
+
+<div class="box"><b>🇸🇦 السعودية - 22 رقم متاح - المصدر: receive-smss.com</b>
+<div class="num">+966 55 1000000</div>
+<div class="num">+966 55 1000001</div>
+<a href="https://receive-smss.com" target="_blank">استلام رسالة</a>
+</div>
+
+<div class="box"><b>🇪🇬 مصر - 22 رقم متاح - المصدر: smss.net</b>
+<div class="num">+20 10 10000000</div>
+<div class="num">+20 10 10000001</div>
+<a href="https://smss.net" target="_blank">استلام رسالة</a>
+</div>
+
+<div class="box"><b>🇲🇦 المغرب - 20 رقم متاح - المصدر: receive-sms.io</b>
+<div class="num">+212 6 11000000</div>
+<div class="num">+212 6 11000001</div>
+<a href="https://receive-sms.io" target="_blank">استلام رسالة</a>
+</div>
+
+<div class="ad">📢 إعلان - مساحة إعلانية</div>
+
+<div class="box"><b>🇺🇸 أمريكا - 35 رقم متاح - المصدر: freephonenum.com</b>
+<div class="num">+1 203 916000</div>
+<div class="num">+1 203 916001</div>
+<a href="https://freephonenum.com" target="_blank">استلام رسالة</a>
+</div>
+
 </body>
 </html>
