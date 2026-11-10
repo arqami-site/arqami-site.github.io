@@ -1,153 +1,26 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أرقامي | أرقام مؤقتة حقيقية - استقبل SMS مجاناً</title>
-<style>
-body{font-family:Arial;background:#0f172a;color:white;margin:0}
-header{background:#020617;padding:25px 15px;text-align:center;border-bottom:3px solid #22c55e}
-header h1{margin:0;font-size:28px}
-header p{color:#94a3b8}
-.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:15px}
-.tab{background:#1e293b;color:white;border:none;padding:10px 16px;border-radius:20px;cursor:pointer}
-.tab.active{background:#22c55e;color:#000;font-weight:bold}
-.search{max-width:500px;margin:0 auto 15px auto;padding:0 15px}
-.search input{width:100%;padding:12px;border-radius:10px;border:none;outline:none;font-size:16px}
-.section{max-width:1100px;margin:20px auto 5px auto;padding:0 15px;font-size:20px;font-weight:bold}
-.grid{max-width:1100px;margin:auto;padding:15px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:15px}
-.card{background:#1e293b;border:1px solid #334155;border-radius:15px;padding:16px;text-align:center}
-.country{font-size:18px;font-weight:bold}
-.flag{font-size:30px}
-.number{font-size:19px;font-weight:bold;background:#000;padding:10px;border-radius:10px;margin:10px 0;direction:ltr}
-.badge{display:inline-block;background:#14532d;padding:4px 10px;border-radius:20px;font-size:12px;margin:2px}
-.btn{display:block;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;margin-top:8px;border:none;cursor:pointer;width:100%;font-size:15px}
-.copy{background:white;color:black}
-.inbox{background:#22c55e;color:white}
-.warn{max-width:1100px;margin:15px auto;padding:12px;background:#fef3c7;color:#333;border-radius:10px;font-size:13px;line-height:1.7}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:12px 20px;border-radius:20px;font-weight:bold;z-index:999}
-</style>
-</head>
-<body>
 
-<header>
-<h1>📱 أرقامي - ARQAMI</h1>
-<p>أرقام عامة مؤقتة حقيقية - صندوق وارد حقيقي - اللي سجل سجل</p>
-</header>
-
-<div class="tabs">
-<button class="tab active" onclick="setF('all',this)">🌍 الكل</button>
-<button class="tab" onclick="setF('arab',this)">🌍 الدول العربية</button>
-<button class="tab" onclick="setF('world',this)">🌐 دول العالم</button>
-<button class="tab" onclick="setF('yemen',this)">🇾🇪 اليمن</button>
-</div>
-
-<div class="search"><input id="search" oninput="render()" placeholder="🔍 ابحث عن دولة أو رقم..."></div>
-
-<div class="warn">⚠️ <b>مهم:</b> الأرقام عامة ومؤقتة، الكل بيشوف الرسائل. لا تستخدمها لحساب بنكي أو حساب مهم. إذا رقم ما وصله كود، جرب رقم ثاني. الأرقام تتغير كل يوم، وزر "صندوق الوارد" بيفتحلك الصندوق الحقيقي الحي من الموقع الأصلي receive-sms.io</div>
-
-<div id="content"></div>
-
-<script>
-let FILTER='all';
-
-// ================= الدول العربية - أرقام مؤقتة حقيقية =================
-const DATA = [
-// --- اليمن ---
-{country:"اليمن",flag:"🇾🇪",number:"+967 770 123 456",code:"yemen",type:"arab",inbox:"https://receive-sms.io/yemen/"},
-{country:"اليمن 2",flag:"🇾🇪",number:"+967 773 987 654",code:"yemen",type:"arab",inbox:"https://receive-sms.io/yemen/"},
-// --- السعودية ---
-{country:"السعودية",flag:"🇸🇦",number:"+966 50 123 4567",code:"saudi",type:"arab",inbox:"https://receive-sms.io/saudi-arabia/"},
-{country:"السعودية 2",flag:"🇸🇦",number:"+966 55 987 6543",code:"saudi",type:"arab",inbox:"https://receive-sms.io/saudi-arabia/"},
-// --- مصر ---
-{country:"مصر",flag:"🇪🇬",number:"+20 100 123 4567",code:"egypt",type:"arab",inbox:"https://receive-sms.io/egypt/"},
-{country:"مصر 2",flag:"🇪🇬",number:"+20 101 987 6543",code:"egypt",type:"arab",inbox:"https://receive-sms.io/egypt/"},
-// --- المغرب ---
-{country:"المغرب",flag:"🇲🇦",number:"+212 6 12 34 56 78",code:"morocco",type:"arab",inbox:"https://receive-sms.io/morocco/"},
-// --- الجزائر ---
-{country:"الجزائر",flag:"🇩🇿",number:"+213 550 12 34 56",code:"algeria",type:"arab",inbox:"https://receive-sms.io/algeria/"},
-// --- تونس ---
-{country:"تونس",flag:"🇹🇳",number:"+216 22 123 456",code:"tunisia",type:"arab",inbox:"https://receive-sms.io/tunisia/"},
-// --- الأردن ---
-{country:"الأردن",flag:"🇯🇴",number:"+962 79 123 4567",code:"jordan",type:"arab",inbox:"https://receive-sms.io/jordan/"},
-// --- العراق ---
-{country:"العراق",flag:"🇮🇶",number:"+964 770 123 4567",code:"iraq",type:"arab",inbox:"https://receive-sms.io/iraq/"},
-// --- الإمارات ---
-{country:"الإمارات",flag:"🇦🇪",number:"+971 50 123 4567",code:"uae",type:"arab",inbox:"https://receive-sms.io/united-arab-emirates/"},
-// --- لبنان ---
-{country:"لبنان",flag:"🇱🇧",number:"+961 70 123 456",code:"lebanon",type:"arab",inbox:"https://receive-sms.io/lebanon/"},
-// --- فلسطين ---
-{country:"فلسطين",flag:"🇵🇸",number:"+970 59 123 4567",code:"palestine",type:"arab",inbox:"https://receive-sms.io/palestine/"},
-// --- السودان ---
-{country:"السودان",flag:"🇸🇩",number:"+249 90 123 4567",code:"sudan",type:"arab",inbox:"https://receive-sms.io/sudan/"},
-// --- ليبيا ---
-{country:"ليبيا",flag:"🇱🇾",number:"+218 91 123 4567",code:"libya",type:"arab",inbox:"https://receive-sms.io/libya/"},
-// --- سوريا ---
-{country:"سوريا",flag:"🇸🇾",number:"+963 94 123 4567",code:"syria",type:"arab",inbox:"https://receive-sms.io/syria/"},
-// --- الكويت ---
-{country:"الكويت",flag:"🇰🇼",number:"+965 9900 1234",code:"kuwait",type:"arab",inbox:"https://receive-sms.io/kuwait/"},
-// --- قطر ---
-{country:"قطر",flag:"🇶🇦",number:"+974 3300 1234",code:"qatar",type:"arab",inbox:"https://receive-sms.io/qatar/"},
-// --- البحرين ---
-{country:"البحرين",flag:"🇧🇭",number:"+973 3300 1234",code:"bahrain",type:"arab",inbox:"https://receive-sms.io/bahrain/"},
-// --- عمان ---
-{country:"عمان",flag:"🇴🇲",number:"+968 9100 1234",code:"oman",type:"arab",inbox:"https://receive-sms.io/oman/"},
-// --- موريتانيا ---
-{country:"موريتانيا",flag:"🇲🇷",number:"+222 22 12 34 56",code:"mauritania",type:"arab",inbox:"https://receive-sms.io/mauritania/"},
-
-// ================= دول العالم =================
-{country:"إيطاليا",flag:"🇮🇹",number:"+39 333 1234567",code:"italy",type:"world",inbox:"https://receive-sms.io/italy/"},
-{country:"بلجيكا",flag:"🇧🇪",number:"+32 470 12 34 56",code:"belgium",type:"world",inbox:"https://receive-sms.io/belgium/"},
-{country:"بريطانيا",flag:"🇬🇧",number:"+44 20 7946 0958",code:"uk",type:"world",inbox:"https://receive-sms.io/united-kingdom/"},
-{country:"بريطانيا 2",flag:"🇬🇧",number:"+44 7300 123456",code:"uk",type:"world",inbox:"https://receive-sms.io/united-kingdom/"},
-{country:"تركيا",flag:"🇹🇷",number:"+90 532 123 45 67",code:"turkey",type:"world",inbox:"https://receive-sms.io/turkey/"},
-{country:"روسيا",flag:"🇷🇺",number:"+7 916 123 45 67",code:"russia",type:"world",inbox:"https://receive-sms.io/russia/"},
-{country:"فرنسا",flag:"🇫🇷",number:"+33 6 12 34 56 78",code:"france",type:"world",inbox:"https://receive-sms.io/france/"},
-{country:"فرنسا 2",flag:"🇫🇷",number:"+33 6 98 76 54 32",code:"france",type:"world",inbox:"https://receive-sms.io/france/"},
-{country:"كندا",flag:"🇨🇦",number:"+1 438 555 0182",code:"canada",type:"world",inbox:"https://receive-sms.io/canada/"},
-{country:"كندا 2",flag:"🇨🇦",number:"+1 204 808 6621",code:"canada",type:"world",inbox:"https://receive-sms.io/canada/"},
-{country:"هولندا",flag:"🇳🇱",number:"+31 6 12345678",code:"netherlands",type:"world",inbox:"https://receive-sms.io/netherlands/"},
-{country:"أمريكا",flag:"🇺🇸",number:"+1 203 916 6319",code:"usa",type:"world",inbox:"https://receive-sms.io/usa/"},
-{country:"أمريكا 2",flag:"🇺🇸",number:"+1 940 784 8495",code:"usa",type:"world",inbox:"https://receive-sms.io/usa/"},
-{country:"أمريكا 3",flag:"🇺🇸",number:"+1 618 484 1899",code:"usa",type:"world",inbox:"https://receive-sms.io/usa/"},
-{country:"ألمانيا",flag:"🇩🇪",number:"+49 152 95218256",code:"germany",type:"world",inbox:"https://receive-sms.io/germany/"},
-{country:"إسبانيا",flag:"🇪🇸",number:"+34 600 123 456",code:"spain",type:"world",inbox:"https://receive-sms.io/spain/"},
-{country:"السويد",flag:"🇸🇪",number:"+46 70 123 4567",code:"sweden",type:"world",inbox:"https://receive-sms.io/sweden/"},
-{country:"فنلندا",flag:"🇫🇮",number:"+358 40 123 4567",code:"finland",type:"world",inbox:"https://receive-sms.io/finland/"},
-{country:"الدنمارك",flag:"🇩🇰",number:"+45 12 34 56 78",code:"denmark",type:"world",inbox:"https://receive-sms.io/denmark/"},
-{country:"البرتغال",flag:"🇵🇹",number:"+351 928 432 543",code:"portugal",type:"world",inbox:"https://receive-sms.io/portugal/"},
-{country:"أوكرانيا",flag:"🇺🇦",number:"+380 50 123 4567",code:"ukraine",type:"world",inbox:"https://receive-sms.io/ukraine/"},
-{country:"الهند",flag:"🇮🇳",number:"+91 90000 12345",code:"india",type:"world",inbox:"https://receive-sms.io/india/"},
-{country:"إندونيسيا",flag:"🇮🇩",number:"+62 812 1234 5678",code:"indonesia",type:"world",inbox:"https://receive-sms.io/indonesia/"},
-{country:"الفلبين",flag:"🇵🇭",number:"+63 917 182 3459",code:"philippines",type:"world",inbox:"https://receive-sms.io/philippines/"},
-];
-
-function setF(f,el){FILTER=f;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');render();}
-function card(d){return `<div class="card"><div class="flag">${d.flag}</div><div class="country">${d.country}</div><div class="number">${d.number}</div><div><span class="badge">🟢 متاح</span> <span class="badge">📩 صندوق حقيقي</span></div><button class="btn copy" onclick="copyNum('${d.number}',this)">📋 نسخ الرقم</button><button class="btn inbox" onclick="openInbox('${d.country}','${d.flag}','${d.number}')">📥 فتح صندوق الوارد الحقيقي</button></div>`}
-function render(){
-const q=(document.getElementById('search').value||'').trim();
-let list=DATA.filter(d=>FILTER==='all'||FILTER===d.code||FILTER===d.type);
-if(q) list=list.filter(d=>d.country.includes(q)||d.number.includes(q));
-let html='';
-if(FILTER==='yemen'){html=`<div class="section">🇾🇪 اليمن (${list.length})</div><div class="grid">${list.map(card).join('')}</div>`;}
-else{
-if(FILTER==='all'||FILTER==='arab'){const a=list.filter(d=>d.type==='arab');if(a.length) html+=`<div class="section">🌍 الدول العربية (${a.length})</div><div class="grid">${a.map(card).join('')}</div>`;}
-if(FILTER==='all'||FILTER==='world'){const w=list.filter(d=>d.type==='world');if(w.length) html+=`<div class="section">🌐 دول العالم (${w.length})</div><div class="grid">${w.map(card).join('')}</div>`;}
-}
-if(!html) html='<p style="text-align:center;padding:30px;color:#94a3b8">لا توجد نتائج</p>';
-document.getElementById('content').innerHTML=html;
-}
-function toast(m){const o=document.querySelector('.toast');if(o)o.remove();const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2000);}
-async function copyNum(n,btn){try{await navigator.clipboard.writeText(n)}catch(e){const ta=document.createElement('textarea');ta.value=n;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}toast('تم النسخ ✅ '+n);const old=btn.textContent;btn.textContent='تم النسخ ✅';setTimeout(()=>btn.textContent=old,1500);}
 function openInbox(c,f,n){
-  const item = DATA.find(d => d.number === n);
-  if(item && item.inbox){
-    window.open(item.inbox, '_blank');
-    toast('جاري فتح الصندوق الحقيقي... 📩');
-    return;
-  }
+  // نشيل المسافات من الرقم
+  const clean = n.replace(/[^+0-9]/g,''); // مثلا +447407608523
+  const realUrl = 'https://receive-sms.io/' + clean;
+
+  // نستخدم بروكسي مشان يبين الرابط كأنو من موقعك، وما يبين الموقع الأصلي
+  const hiddenUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(realUrl);
+
+  const modal = document.getElementById('modal');
+  document.getElementById('inboxTitle').textContent = '📩 صندوق وارد أرقامي - ' + f + ' ' + c;
+  document.getElementById('inboxNum').textContent = n;
+
+  document.getElementById('msgs').innerHTML = `
+    <div style="text-align:center;padding:10px">
+      <div style="background:#0f172a;padding:12px;border-radius:10px;margin-bottom:10px">
+        <b style="color:#22c55e">✅ أرقامي - صندوق الوارد الخاص بك</b><br>
+        <span style="font-size:12px;color:#94a3b8">الرقم: ${n} | يتم تحديث الرسائل تلقائياً</span>
+      </div>
+      <button onclick="document.getElementById('inboxFrame').src = document.getElementById('inboxFrame').src" style="background:white;color:black;padding:10px 18px;border:none;border-radius:20px;font-weight:bold;cursor:pointer;margin-bottom:10px">🔄 تحديث الرسائل</button>
+      <iframe id="inboxFrame" src="${hiddenUrl}" style="width:100%;height:600px;border:none;border-radius:10px;background:white"></iframe>
+      <p style="font-size:12px;color:#94a3b8;margin-top:10px">إذا ما ظهرت الرسائل، اضغط تحديث الرسائل</p>
+    </div>
+  `;
+  modal.classList.add('open');
 }
-render();
-</script>
-</body>
-</html>
