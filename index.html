@@ -3,113 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ أرقامي PRO - أرقام مجانية</title>
+<title>⚡ أرقامي PRO - أرقام مجانية لكل الدول</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f1f5f9}
-.top{background:#2563eb;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:20}
-.top b{font-size:24px}.top span{background:#22c55e;padding:4px 10px;border-radius:20px;font-size:12px}
-.sub{text-align:center;padding:15px 10px;background:#fff}
-.sub b{color:#1e3a8a;font-size:20px}.sub p{color:#666;font-size:13px}
-.filter{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;white-space:nowrap}
-.filter button{border:1px solid #e2e8f0;background:#fff;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer}
+.top{background:#2563eb;color:#fff;padding:15px;text-align:center;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.top b{font-size:22px}
+.adTop{background:#fff;text-align:center;padding:10px;margin:10px;border:2px dashed #cbd5e1;border-radius:12px;color:#888;font-size:13px}
+.adBox{background:#fff;text-align:center;padding:18px;margin:14px 0;border:2px dashed #f59e0b;border-radius:14px;color:#888}
+.filter{display:flex;gap:8px;overflow:auto;padding:10px;background:#fff;white-space:nowrap;position:sticky;top:60px;z-index:10}
+.filter button{border:1px solid #e2e8f0;background:#fff;padding:8px 14px;border-radius:20px;font-weight:bold;cursor:pointer;white-space:nowrap}
 .filter button.active{background:#dcfce7;border-color:#22c55e;color:#166534}
 .wrap{padding:12px;max-width:900px;margin:auto}
-.countryBox{background:#fff;border-radius:18px;margin-bottom:18px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.countryHead{background:#0f172a;color:#fff;padding:13px 15px;display:flex;justify-content:space-between;align-items:center}
-.count{background:#22c55e;padding:4px 12px;border-radius:20px;font-size:12px}
+.countryBox{background:#fff;border-radius:18px;margin-bottom:8px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.countryHead{background:#0f172a;color:#fff;padding:14px 15px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.countryHead .left{display:flex;gap:10px;align-items:center}
+.flag{font-size:24px}
+.count{background:#22c55e;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.source{font-size:11px;color:#94a3b8}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
 @media(max-width:600px){.grid{grid-template-columns:1fr}}
 .numCard{border:1px solid #f1f5f9;border-radius:15px;padding:12px;text-align:center}
 .numCard .num{font-size:18px;font-weight:bold;direction:ltr;margin:8px 0}
 .badge{font-size:12px;padding:4px 10px;border-radius:20px;font-weight:bold}
-.wa{background:#dcfce7;color:#166534}.live{background:#22c55e;color:#fff}
-.btns{display:flex;gap:7px;margin-top:10px}
-.btns button{flex:1;padding:9px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;font-size:13px}
-.copy{background:#f1f5f9}.open{background:#2563eb;color:#fff}
-/* صندوق الرسائل من تصميمنا - 100% أرقامي */
-#viewer{display:none;background:#fff;margin:12px;border-radius:18px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1)}
-#viewerHead{background:#0f172a;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center}
-#viewerHead button{background:#ef4444;color:#fff;border:none;padding:7px 12px;border-radius:15px;cursor:pointer}
-.inbox{padding:15px}
-.msg{border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px;background:#f8fafc}
-.msg b{color:#2563eb}
-.msg .code{background:#dcfce7;padding:4px 10px;border-radius:8px;font-weight:bold;font-size:18px;direction:ltr;display:inline-block;margin-top:6px}
-.refresh{width:100%;padding:12px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-weight:bold;cursor:pointer;font-size:15px}
-.note{background:#fef9c3;padding:10px;border-radius:10px;font-size:12px;text-align:center;margin-bottom:12px}
-</style>
-</head>
-<body>
-<div class="top"><b>⚡ أرقامي PRO</b> <span>LIVE 231 رقم</span></div>
-<div class="sub"><b>أرقام وهمية مجانية - رسائل حقيقية مباشرة LIVE</b><p>أرقام مؤقتة مجانية 100% - استقبل رسائل نصية قصيرة عبر الإنترنت</p></div>
-<div class="filter">
-<button onclick="show('all',this)" class="active">الكل 231</button>
-<button onclick="show('wa',this)">💚 واتساب فقط</button>
-<button onclick="show('YE',this)">اليمن</button>
-<button onclick="show('SA',this)">السعودية</button>
-<button onclick="show('EG',this)">مصر</button>
-<button onclick="show('US',this)">أمريكا</button>
-<button onclick="show('GB',this)">بريطانيا</button>
-<button onclick="show('CA',this)">كندا</button>
-<button onclick="show('FR',this)">فرنسا</button>
-<button onclick="show('DE',this)">ألمانيا</button>
-<button onclick="show('AE',this)">الإمارات</button>
-</div>
-
-<div id="viewer">
-<div id="viewerHead"><b id="viewerTitle">📩 رسائل الرقم</b><button onclick="closeViewer()">✕ إغلاق</button></div>
-<div class="inbox">
-<div class="note">⚡ أرقامي PRO - انت في موقع أرقامي - يتم تحديث الرسائل الآن...</div>
-<div id="msgs"></div>
-<button class="refresh" onclick="refreshMsgs()">🔄 تحديث الرسائل</button>
-<p style="font-size:12px;color:#888;text-align:center">إذا ما وصلك الكود، جرب رقم تاني، الأرقام مجانية ومشتركة</p>
-</div>
-</div>
-
-<div class="wrap" id="list"></div>
-<script>
-let currentNum="";
-function gen(prefix, count, start, waCount){
-let arr=[]; for(let i=0;i<count;i++){let n = start+i; arr.push({num: prefix+" "+n, wa: i<waCount});} return arr;
-}
-const countries=[
-{ name:"اليمن", flag:"YE", code:"YE", nums: gen("+967 771",31,1000,9) },
-{ name:"السعودية", flag:"SA", code:"SA", nums: gen("+966 55",30,1000000,12) },
-{ name:"مصر", flag:"EG", code:"EG", nums: gen("+20 10",30,10000000,9) },
-{ name:"أمريكا", flag:"US", code:"US", nums: gen("+1 203",45,916000,23) },
-{ name:"بريطانيا", flag:"GB", code:"GB", nums: gen("+44 740",25,1000000,12) },
-{ name:"كندا", flag:"CA", code:"CA", nums: gen("+1 289",20,334000,10) },
-{ name:"فرنسا", flag:"FR", code:"FR", nums: gen("+33 6",20,11000000,5) },
-{ name:"ألمانيا", flag:"DE", code:"DE", nums: gen("+49 151",15,1100000,4) },
-{ name:"الإمارات", flag:"AE", code:"AE", nums: gen("+971 50",15,1000000,5) },
-];
-function render(f){
-let html="";
-countries.forEach(c=>{
-if(f!=="all" && f!=="wa" && c.code!==f) return;
-let nums = f==="wa" ? c.nums.filter(n=>n.wa) : c.nums;
-if(nums.length===0) return;
-html+=`<div class="countryBox"><div class="countryHead"><b>${c.flag} ${c.name}</b><span class="count">${nums.length} أرقام</span></div><div class="grid">`;
-nums.forEach(n=>{
-let badge = n.wa ? '<span class="badge wa">يقبل واتساب</span>' : '<span class="badge live">مباشر</span>';
-html+=`<div class="numCard"><div style="display:flex;justify-content:space-between"><span>${c.code}</span>${badge}</div><div class="num">${n.num}</div><div style="color:#888;font-size:12px">قبل 10 ثانية</div><div class="btns"><button class="copy" onclick="copyNum('${n.num}')">نسخ</button><button class="open" onclick="openMsg('${c.name} ${n.num}')">استلام رسالة</button></div></div>`;
-});
-html+=`</div></div>`;
-});
-document.getElementById("list").innerHTML=html;
-}
-function show(f,b){document.querySelectorAll(".filter button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(f);}
-function copyNum(n){navigator.clipboard.writeText(n);alert("تم نسخ الرقم: "+n+" ✅");}
-function openMsg(title){currentNum=title;document.getElementById("viewer").style.display="block";document.getElementById("viewerTitle").innerText="📩 رسائل: "+title;refreshMsgs();document.getElementById("viewer").scrollIntoView({behavior:"smooth"});}
-function closeViewer(){document.getElementById("viewer").style.display="none";}
-function refreshMsgs(){
-let codes = [Math.floor(100000+Math.random()*900000), Math.floor(100000+Math.random()*900000), Math.floor(1000+Math.random()*9000)];
-document.getElementById("msgs").innerHTML = `
-<div class="msg"><b>WhatsApp</b><div style="font-size:12px;color:#888">قبل 2 دقيقة - إلى ${currentNum}</div><div>رمز التحقق الخاص بك هو:</div><div class="code">${codes[0]}</div></div>
-<div class="msg"><b>Telegram</b><div style="font-size:12px;color:#888">قبل 5 دقائق - إلى ${currentNum}</div><div>كود التفعيل:</div><div class="code">${codes[1]}</div></div>
-<div class="msg"><b>Google</b><div style="font-size:12px;color:#888">قبل 9 دقائق - إلى ${currentNum}</div><div>Your verification code is:</div><div class="code">${codes[2]}</div></div>
-`;
-}
-render("all");
-</script>
-</body>
-</html>
+.wa{background:#dcfce7
