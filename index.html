@@ -29,12 +29,12 @@ iframe {width: 100%; height: 100%; border: none; border-radius: 8px; background:
 </head>
 <body>
 
-<div class="top">⚡ أرقامي PRO - تحديث يومي تلقائي</div>
+<div class="top">⚡ أرقامي PRO - رسائل مباشرة</div>
 <div class="ad">📢 إعلان - مساحة إعلانية</div>
 <h3>أحدث الأرقام المجانية لاستقبال رسائل الواتساب</h3>
 
 <div id="numbers-container">
-    <p>جاري تحميل الأرقام المحدثة...</p>
+    <!-- الأرقام ستعرض هنا مباشرة -->
 </div>
 
 <!-- نافذة عرض الرسائل -->
@@ -49,45 +49,66 @@ iframe {width: 100%; height: 100%; border: none; border-radius: 8px; background:
 <div id="toast" class="toast">تم نسخ الرقم بنجاح!</div>
 
 <script>
-fetch('numbers.json')
-    .then(response => response.json())
-    .then(data => {
-        let container = document.getElementById('numbers-container');
-        container.innerHTML = '';
-        
-        let grouped = {};
-        data.numbers.forEach(item => {
-            if (!grouped[item.country]) {
-                grouped[item.country] = { flag: item.flag, items: [] };
-            }
-            grouped[item.country].items.push(item);
-        });
+// بيانات الأرقام مباشرة داخل الكود لضمان عملها فوراً دون أخطاء
+const siteData = {
+  "numbers": [
+    {
+      "country": "اليمن",
+      "flag": "🇾🇪",
+      "number": "+967 771 1000",
+      "source_url": "https://receive-sms.io/yemen-phone-number/+9677711000"
+    },
+    {
+      "country": "السعودية",
+      "flag": "🇸🇦",
+      "number": "+966 55 1000000",
+      "source_url": "https://receive-smss.com/sms/+966551000000"
+    },
+    {
+      "country": "مصر",
+      "flag": "🇪🇬",
+      "number": "+20 10 10000000",
+      "source_url": "https://smss.net/egypt-phone-number/+201010000000"
+    }
+  ]
+};
 
-        for (let country in grouped) {
-            let group = grouped[country];
-            let box = document.createElement('div');
-            box.className = 'box';
-            
-            let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
-            
-            group.items.forEach(numObj => {
-                html += `
-                <div class="num-container">
-                    <span class="num">${numObj.number}</span>
-                    <div class="btn-group">
-                        <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
-                        <button class="inbox-btn" onclick="openInbox('${numObj.source_url}')">عرض الرسائل هنا</button>
-                    </div>
-                </div>`;
-            });
-            
-            box.innerHTML = html;
-            container.appendChild(box);
+function renderNumbers() {
+    let container = document.getElementById('numbers-container');
+    container.innerHTML = '';
+    
+    let grouped = {};
+    siteData.numbers.forEach(item => {
+        if (!grouped[item.country]) {
+            grouped[item.country] = { flag: item.flag, items: [] };
         }
-    })
-    .catch(error => {
-        document.getElementById('numbers-container').innerHTML = '<p>عذراً، تأكد من إضافة ملف numbers.json ليعمل الموقع بشكل صحيح.</p>';
+        grouped[item.country].items.push(item);
     });
+
+    for (let country in grouped) {
+        let group = grouped[country];
+        let box = document.createElement('div');
+        box.className = 'box';
+        
+        let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
+        
+        group.items.forEach(numObj => {
+            html += `
+            <div class="num-container">
+                <span class="num">${numObj.number}</span>
+                <div class="btn-group">
+                    <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
+                    <button class="inbox-btn" onclick="openInbox('${numObj.source_url}')">عرض الرسائل هنا</button>
+                </div>
+            </div>`;
+        });
+        
+        box.innerHTML = html;
+        container.appendChild(box);
+    }
+}
+
+renderNumbers();
 
 function copyNumber(num) {
     navigator.clipboard.writeText(num).then(() => {
