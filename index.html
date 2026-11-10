@@ -3,52 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arqami PRO</title>
+<title>Arqami PRO - أرقام متجددة</title>
 <style>
-body{margin:0;font-family:Arial;background:#f1f5f9;text-align:center}
+body{margin:0;font-family:Arial, sans-serif;background:#f1f5f9;text-align:center}
 .top{background:#2563eb;color:#fff;padding:15px;font-size:22px;font-weight:bold}
 .ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
-.box{background:#fff;margin:12px;border-radius:16px;padding:15px;text-align:right}
-.num{font-size:18px;font-weight:bold;direction:ltr;background:#f8fafc;padding:10px;border-radius:10px;margin:8px 0;text-align:center}
-a{display:inline-block;background:#2563eb;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:bold;margin:5px}
+.box{background:#fff;margin:12px auto;max-width:600px;border-radius:16px;padding:15px;text-align:right;box-shadow: 0 2px 4px rgba(0,0,0,0.05)}
+.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:8px 12px;border-radius:10px;margin:8px 0;flex-wrap:wrap;gap:8px;}
+.num{font-size:18px;font-weight:bold;direction:ltr;}
+.btn-group{display:flex;gap:5px;}
+button, a.action-btn{background:#2563eb;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;border:none;cursor:pointer;transition:background 0.2s}
+button:hover, a.action-btn:hover{background:#1d4ed8}
+.copy-btn{background:#10b981}
+.copy-btn:hover{background:#059669}
+.inbox-btn{background:#7c3aed}
+.inbox-btn:hover{background:#6d28d9}
+
+.modal {display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);}
+.modal-content {background-color: #fefefe; margin: 5% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 600px; height: 80%; display: flex; flex-direction: column;}
+.close {color: #aaa; align-self: flex-end; font-size: 28px; font-weight: bold; cursor: pointer;}
+.close:hover {color: black;}
+iframe {width: 100%; height: 100%; border: none; border-radius: 8px; background: #fff;}
+.toast {position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 8px; display: none; font-size: 14px; z-index: 2000;}
 </style>
 </head>
 <body>
-<div class="top">⚡ أرقامي PRO - LIVE 412 رقم - 23 دولة</div>
+
+<div class="top">⚡ أرقامي PRO - تحديث يومي تلقائي</div>
 <div class="ad">📢 إعلان - مساحة إعلانية</div>
-<h3>أرقام مجانية لكل الدول العربية</h3>
+<h3>أحدث الأرقام المجانية لاستقبال رسائل الواتساب</h3>
 
-<div class="box"><b>🇾🇪 اليمن - 18 رقم متاح - المصدر: receive-sms.io</b>
-<div class="num">+967 771 1000</div>
-<div class="num">+967 771 1001</div>
-<a href="https://receive-sms.io" target="_blank">استلام رسالة</a>
+<div id="numbers-container">
+    <p>جاري تحميل الأرقام المحدثة...</p>
 </div>
 
-<div class="box"><b>🇸🇦 السعودية - 22 رقم متاح - المصدر: receive-smss.com</b>
-<div class="num">+966 55 1000000</div>
-<div class="num">+966 55 1000001</div>
-<a href="https://receive-smss.com" target="_blank">استلام رسالة</a>
+<!-- نافذة عرض الرسائل -->
+<div id="inboxModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeInbox()">&times;</span>
+    <h3 style="margin: 0 0 10px 0; text-align:right;">صندوق الوارد المباشر</h3>
+    <iframe id="inboxFrame" src=""></iframe>
+  </div>
 </div>
 
-<div class="box"><b>🇪🇬 مصر - 22 رقم متاح - المصدر: smss.net</b>
-<div class="num">+20 10 10000000</div>
-<div class="num">+20 10 10000001</div>
-<a href="https://smss.net" target="_blank">استلام رسالة</a>
-</div>
+<div id="toast" class="toast">تم نسخ الرقم بنجاح!</div>
 
-<div class="box"><b>🇲🇦 المغرب - 20 رقم متاح - المصدر: receive-sms.io</b>
-<div class="num">+212 6 11000000</div>
-<div class="num">+212 6 11000001</div>
-<a href="https://receive-sms.io" target="_blank">استلام رسالة</a>
-</div>
+<script>
+fetch('numbers.json')
+    .then(response => response.json())
+    .then(data => {
+        let container = document.getElementById('numbers-container');
+        container.innerHTML = '';
+        
+        let grouped = {};
+        data.numbers.forEach(item => {
+            if (!grouped[item.country]) {
+                grouped[item.country] = { flag: item.flag, items: [] };
+            }
+            grouped[item.country].items.push(item);
+        });
 
-<div class="ad">📢 إعلان - مساحة إعلانية</div>
+        for (let country in grouped) {
+            let group = grouped[country];
+            let box = document.createElement('div');
+            box.className = 'box';
+            
+            let html = `<b>${group.flag} ${country} - أرقام متاحة للاستلام الفوري</b>`;
+            
+            group.items.forEach(numObj => {
+                html += `
+                <div class="num-container">
+                    <span class="num">${numObj.number}</span>
+                    <div class="btn-group">
+                        <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
+                        <button class="inbox-btn" onclick="openInbox('${numObj.source_url}')">عرض الرسائل هنا</button>
+                    </div>
+                </div>`;
+            });
+            
+            box.innerHTML = html;
+            container.appendChild(box);
+        }
+    })
+    .catch(error => {
+        document.getElementById('numbers-container').innerHTML = '<p>عذراً، تأكد من إضافة ملف numbers.json ليعمل الموقع بشكل صحيح.</p>';
+    });
 
-<div class="box"><b>🇺🇸 أمريكا - 35 رقم متاح - المصدر: freephonenum.com</b>
-<div class="num">+1 203 916000</div>
-<div class="num">+1 203 916001</div>
-<a href="https://freephonenum.com" target="_blank">استلام رسالة</a>
-</div>
+function copyNumber(num) {
+    navigator.clipboard.writeText(num).then(() => {
+        let toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    });
+}
+
+function openInbox(url) {
+    document.getElementById('inboxFrame').src = url;
+    document.getElementById('inboxModal').style.display = 'block';
+}
+
+function closeInbox() {
+    document.getElementById('inboxModal').style.display = 'none';
+    document.getElementById('inboxFrame').src = '';
+}
+
+window.onclick = function(event) {
+    let modal = document.getElementById('inboxModal');
+    if (event.target == modal) {
+        closeInbox();
+    }
+}
+</script>
 
 </body>
 </html>
