@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أرقامي | كل دول getfreesmsnumber</title>
+<title>أرقامي | كل دولة لحالها</title>
 <style>
 body{margin:0;font-family:Arial;background:#f1f5f9}
 .top{background:#0f172a;color:#fff;text-align:center;padding:18px 10px;position:sticky;top:0;z-index:20}
@@ -28,78 +28,59 @@ body{margin:0;font-family:Arial;background:#f1f5f9}
 #viewer{display:none;background:#fff;margin:0 15px 15px;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1)}
 #viewerHead{background:#0f172a;color:#fff;padding:12px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
 #viewerHead button{background:#ef4444;color:#fff;border:none;padding:7px 12px;border-radius:15px;cursor:pointer}
-#viewer iframe{width:100%;height:650px;border:none}
+#viewer iframe{width:100%;height:650px;border:none;background:#fff}
 </style>
 </head>
 <body>
-<div class="top"><b>أرقامي</b><p>كل دولة من getfreesmsnumber بخانة لحالها - الرسائل تفتح هون بنفس الموقع</p></div>
+<div class="top"><b>أرقامي</b><p>كل دولة بخانة لحالها - الرسائل تفتح هون بنفس الموقع</p></div>
 <div class="filter">
 <button class="active" onclick="show('all',this)">كل الدول</button>
 <button onclick="show('arab',this)">🌍 الدول العربية</button>
 <button onclick="show('usa',this)">🇺🇸 أمريكا</button>
 <button onclick="show('europe',this)">🇪🇺 أوروبا</button>
-<button onclick="show('asia',this)">🌏 آسيا</button>
 <button onclick="show('wa',this)">💚 يقبل واتساب</button>
 </div>
 <div id="viewer">
 <div id="viewerHead"><span id="viewerTitle">📩 رسائل الرقم</span><button onclick="closeViewer()">✕ إغلاق</button></div>
-<div style="background:#fef9c3;padding:10px;font-size:12px;text-align:center">✅ انت لسا بموقع أرقامي - الرسائل حقيقية من المصدر</div>
+<div style="background:#fef9c3;padding:10px;font-size:12px;text-align:center">✅ انت لسا بموقع أرقامي - الرسائل حقيقية وتتحدث لحظة بلحظة</div>
 <iframe id="msgFrame" src=""></iframe>
-<div style="text-align:center;padding:10px"><a id="openExternal" href="#" target="_blank" style="color:#2563eb;font-size:13px">إذا ما فتحت هون بسبب حماية Cloudflare، اضغط هون</a></div>
+<div style="text-align:center;padding:10px"><a id="openExternal" href="#" target="_blank" style="color:#2563eb;font-size:13px">إذا ما فتحت هون، اضغط هون</a></div>
 </div>
 <div class="wrap" id="list"></div>
 <script>
 const countries=[
 { name:"أمريكا", flag:"🇺🇸", cat:"usa", nums:[
- {num:"+12039166319", wa:true, link:"https://getfreesmsnumber.com/"},
- {num:"+12017878454", wa:true, link:"https://getfreesmsnumber.com/"},
- {num:"+13125551234", wa:true, link:"https://getfreesmsnumber.com/"},
- {num:"+19177088169", wa:true, link:"https://getfreesmsnumber.com/"},
+ {num:"+12039166319", wa:true, link:"https://receive-sms.io/usa/"},
+ {num:"+12017878454", wa:true, link:"https://receive-sms.io/usa/"},
+ {num:"+13125551234", wa:true, link:"https://receive-sms.io/usa/"},
 ]},
 { name:"بريطانيا", flag:"🇬🇧", cat:"europe", nums:[
- {num:"+447537150994", wa:true, link:"https://getfreesmsnumber.com/"},
- {num:"+447400123456", wa:true, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"بلجيكا", flag:"🇧🇪", cat:"europe", nums:[
- {num:"+32460123456", wa:false, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"روسيا", flag:"🇷🇺", cat:"europe", nums:[
- {num:"+79653944057", wa:false, link:"https://getfreesmsnumber.com/"},
- {num:"+79151234567", wa:false, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"الصين", flag:"🇨🇳", cat:"asia", nums:[
- {num:"+8613812345678", wa:false, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"الهند", flag:"🇮🇳", cat:"asia", nums:[
- {num:"+919811234567", wa:true, link:"https://getfreesmsnumber.com/"},
- {num:"+919876543210", wa:true, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"كوريا", flag:"🇰🇷", cat:"asia", nums:[
- {num:"+821012345678", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"+447537150994", wa:true, link:"https://receive-sms-free.cc/country/united-kingdom/"},
+ {num:"+447400123456", wa:true, link:"https://receive-sms-free.cc/country/united-kingdom/"},
 ]},
 { name:"كندا", flag:"🇨🇦", cat:"usa", nums:[
- {num:"+12893340783", wa:true, link:"https://getfreesmsnumber.com/"},
-]},
-{ name:"ألمانيا", flag:"🇩🇪", cat:"europe", nums:[
- {num:"+491511112222", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"+12893340783", wa:true, link:"https://receive-sms-free.cc/country/canada/"},
 ]},
 { name:"فرنسا", flag:"🇫🇷", cat:"europe", nums:[
- {num:"+33611112222", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"+33611112222", wa:false, link:"https://receive-sms-free.cc/country/france/"},
+]},
+{ name:"ألمانيا", flag:"🇩🇪", cat:"europe", nums:[
+ {num:"+491511112222", wa:false, link:"https://receive-sms-free.cc/country/germany/"},
 ]},
 { name:"السعودية", flag:"🇸🇦", cat:"arab", nums:[
- {num:"اضغط لعرض المتوفر", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"اضغط لعرض المتوفر", wa:false, link:"https://receive-sms-free.cc/regions/"},
 ]},
 { name:"مصر", flag:"🇪🇬", cat:"arab", nums:[
- {num:"اضغط لعرض المتوفر", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"اضغط لعرض المتوفر", wa:false, link:"https://receive-sms-free.cc/regions/"},
 ]},
 { name:"الإمارات", flag:"🇦🇪", cat:"arab", nums:[
- {num:"اضغط لعرض المتوفر", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"اضغط لعرض المتوفر", wa:false, link:"https://receive-sms-free.cc/regions/"},
 ]},
 { name:"المغرب", flag:"🇲🇦", cat:"arab", nums:[
- {num:"اضغط لعرض المتوفر", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"اضغط لعرض المتوفر", wa:false, link:"https://receive-sms-free.cc/regions/"},
 ]},
 { name:"العراق", flag:"🇮🇶", cat:"arab", nums:[
- {num:"اضغط لعرض المتوفر", wa:false, link:"https://getfreesmsnumber.com/"},
+ {num:"اضغط لعرض المتوفر", wa:false, link:"https://receive-sms-free.cc/regions/"},
 ]},
 ];
 function render(filter){
