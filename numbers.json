@@ -1,16 +1,11 @@
 {
-  "last_updated": "2026-11-10",
   "numbers": [
     {
       "country": "اليمن",
       "flag": "🇾🇪",
       "number": "+967 771 1000",
       "messages": [
-        {
-          "sender": "WhatsApp",
-          "text": "كود تفعيل الواتساب الخاص بك هو: 554-123",
-          "time": "منذ دقيقتين"
-        }
+        {"sender": "WhatsApp", "text": "كودك هو 123456", "time": "قبل دقيقتين"}
       ]
     },
     {
@@ -18,11 +13,7 @@
       "flag": "🇸🇦",
       "number": "+966 55 1000000",
       "messages": [
-        {
-          "sender": "Google",
-          "text": "رمز تحقق حسابك هو 987654",
-          "time": "منذ 5 دقائق"
-        }
+        {"sender": "Telegram", "text": "كودك هو 654321", "time": "قبل 5 دقايق"}
       ]
     },
     {
@@ -30,12 +21,14 @@
       "flag": "🇪🇬",
       "number": "+20 10 10000000",
       "messages": [
-        {
-          "sender": "Telegram",
-          "text": "Your login code is: 1122",
-          "time": "منذ 10 دقائق"
-        }
+        {"sender": "Facebook", "text": "كودك هو 987654", "time": "قبل 10 دقايق"}
       ]
+    },
+    {
+      "country": "سوريا",
+      "flag": "🇸🇾",
+      "number": "+963 944 100000",
+      "messages": []
     }
   ]
 }
