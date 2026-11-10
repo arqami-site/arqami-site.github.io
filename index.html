@@ -26,17 +26,15 @@
 .btns{display:flex;gap:7px;margin-top:10px}
 .btns button{flex:1;padding:9px;border-radius:10px;border:none;font-weight:bold;cursor:pointer;font-size:13px}
 .copy{background:#f1f5f9}.open{background:#2563eb;color:#fff}
-/* هنا الخدعة - نخفي الموقع الثاني */
 #viewer{display:none;background:#fff;margin:12px;border-radius:18px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.1)}
 #viewerHead{background:#0f172a;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center}
-#viewerHead b{font-size:15px}
 #viewerHead button{background:#ef4444;color:#fff;border:none;padding:7px 12px;border-radius:15px;cursor:pointer}
 .viewerWrap{position:relative;height:520px;overflow:hidden;background:#fff}
-.viewerWrap iframe{position:absolute;top:-115px;left:0;width:100%;height:750px;border:none}
-.viewerCoverTop{position:absolute;top:0;left:0;right:0;height:115px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.viewerWrap iframe{position:absolute;top:-160px;left:0;width:100%;height:820px;border:none}
+.viewerCoverTop{position:absolute;top:0;left:0;right:0;height:160px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .viewerCoverTop b{color:#1e3a8a;font-size:18px}
-.viewerCoverTop span{font-size:12px;color:#666}
-.viewerCoverBottom{position:absolute;bottom:0;left:0;right:0;height:70px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;font-size:12px;color:#888}
+.viewerCoverTop span{font-size:12px;color:#666;text-align:center;padding:0 10px}
+.viewerCoverBottom{position:absolute;bottom:0;left:0;right:0;height:135px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center;font-size:12px;color:#888}
 </style>
 </head>
 <body>
@@ -55,7 +53,6 @@
 <button onclick="show('DE',this)">ألمانيا</button>
 <button onclick="show('AE',this)">الإمارات</button>
 </div>
-
 <div id="viewer">
 <div id="viewerHead"><b id="viewerTitle">📩 رسائل الرقم</b><button onclick="closeViewer()">✕ إغلاق</button></div>
 <div class="viewerWrap">
@@ -64,11 +61,10 @@
 <div class="viewerCoverBottom">⚡ أرقامي PRO - جميع الرسائل من أرقامنا الخاصة</div>
 </div>
 </div>
-
 <div class="wrap" id="list"></div>
 <script>
 function gen(prefix, count, start, waCount){
-let arr=[]; for(let i=0;i<count;i++){let n = start+i; arr.push({num: prefix+" "+n, wa: i<waCount, link: "https://receive-sms-free.cc/" });} return arr;
+let arr=[]; for(let i=0;i<count;i++){let n = start+i; arr.push({num: prefix+" "+n, wa: i<waCount, link: "https://receive-sms.io/" });} return arr;
 }
 const countries=[
 { name:"اليمن", flag:"YE", code:"YE", nums: gen("+967 771",31,1000,9) },
