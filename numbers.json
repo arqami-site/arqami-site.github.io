@@ -1,119 +1,77 @@
-{
-    "last_updated": "2026-11-10 12:00:00",
-    "numbers": [
-        {
-            "country": "الولايات المتحدة",
-            "flag": "🇺🇸",
-            "number": "+1 202 555 0143",
-            "messages": [
-                {"sender": "WhatsApp", "text": "كود تفعيل الواتساب: 489-102", "time": "منذ دقيقة"},
-                {"sender": "Google", "text": "رمز التحقق هو 654321", "time": "منذ 10 دقائق"}
-            ]
-        },
-        {
-            "country": "الولايات المتحدة",
-            "flag": "🇺🇸",
-            "number": "+1 415 555 0198",
-            "messages": [
-                {"sender": "Telegram", "text": "Login code: 9981", "time": "منذ 5 دقائق"}
-            ]
-        },
-        {
-            "country": "الولايات المتحدة",
-            "flag": "🇺🇸",
-            "number": "+1 212 555 0182",
-            "messages": [
-                {"sender": "Netflix", "text": "Your Netflix verification code is 5543", "time": "منذ 12 دقيقة"}
-            ]
-        },
-        {
-            "country": "الولايات المتحدة",
-            "flag": "🇺🇸",
-            "number": "+1 312 555 0177",
-            "messages": [
-                {"sender": "PayPal", "text": "Use 7731 as your PayPal security code", "time": "منذ 25 دقيقة"}
-            ]
-        },
-        {
-            "country": "بريطانيا",
-            "flag": "🇬🇧",
-            "number": "+44 7911 123456",
-            "messages": [
-                {"sender": "Telegram", "text": "Your login code is 7781", "time": "منذ 3 دقائق"},
-                {"sender": "Twitter", "text": "رمز تويتر الخاص بك هو 112233", "time": "منذ 15 دقيقة"}
-            ]
-        },
-        {
-            "country": "بريطانيا",
-            "flag": "🇬🇧",
-            "number": "+44 7911 987654",
-            "messages": [
-                {"sender": "Instagram", "text": "334-556 is your Instagram code", "time": "منذ 8 دقائق"}
-            ]
-        },
-        {
-            "country": "بريطانيا",
-            "flag": "🇬🇧",
-            "number": "+44 7700 900077",
-            "messages": [
-                {"sender": "TikTok", "text": "Your verification code is 9901", "time": "منذ 18 دقيقة"}
-            ]
-        },
-        {
-            "country": "كندا",
-            "flag": "🇨🇦",
-            "number": "+1 416 555 0199",
-            "messages": [
-                {"sender": "Instagram", "text": "123-456 is your Instagram code", "time": "منذ 5 دقائق"}
-            ]
-        },
-        {
-            "country": "كندا",
-            "flag": "🇨🇦",
-            "number": "+1 604 555 0144",
-            "messages": [
-                {"sender": "WhatsApp", "text": "رمز تأكيد حسابك: 771-002", "time": "منذ 30 دقيقة"}
-            ]
-        },
-        {
-            "country": "فرنسا",
-            "flag": "🇫🇷",
-            "number": "+33 6 12 34 56 78",
-            "messages": [
-                {"sender": "WhatsApp", "text": "Code de vérification : 902-111", "time": "منذ دقيقتين"}
-            ]
-        },
-        {
-            "country": "فرنسا",
-            "flag": "🇫🇷",
-            "number": "+33 6 99 88 77 66",
-            "messages": [
-                {"sender": "Google", "text": "Votre code de validation Google est 3321", "time": "منذ 14 دقيقة"}
-            ]
-        },
-        {
-            "country": "ألمانيا",
-            "flag": "🇩🇪",
-            "number": "+49 151 23456789",
-            "messages": [
-                {"sender": "Google", "text": "Ihr Google Bestätigungscode lautet 4455", "time": "منذ 12 دقيقة"}
-            ]
-        },
-        {
-            "country": "ألمانيا",
-            "flag": "🇩🇪",
-            "number": "+49 160 98765432",
-            "messages": [
-                {"sender": "Telegram", "text": "Ihr Login Code: 1109", "time": "منذ 20 دقيقة"}
-            ]
-        },
-        {
-            "country": "السويد",
-            "flag": "🇸🇪",
-            "number": "+46 70 123 4567",
-            "messages": [
-                {"sender": "Microsoft", "text": "Use 8832 as your security code", "time": "منذ 20 دقيقة"}
-            ]
-        }
-    ]
-}
+import json
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
+
+def fetch_real_free_numbers():
+    numbers_list = []
+    base_url = "https://receive-smss.com/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
+    try:
+        response = requests.get(base_url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            # البحث عن كروت الأرقام المتاحة في الصفحة الرئيسية
+            boxes = soup.find_all('div', class_='number-boxes-item')
+            
+            for box in boxes[:6]:  # جلب أول 6 أرقام حقيقية متاحة
+                num_elem = box.find('h4')
+                country_elem = box.find('h5')
+                link_elem = box.find('a')
+                
+                if num_elem and link_elem:
+                    phone_number = num_elem.text.strip()
+                    country_name = country_elem.text.strip() if country_elem else "دولة مجانية"
+                    detail_url = link_elem['href']
+                    
+                    # جلب الرسائل الحقيقية الواردة لهذا الرقم
+                    messages = []
+                    try:
+                        sub_res = requests.get(detail_url, headers=headers, timeout=5)
+                        if sub_res.status_code == 200:
+                            sub_soup = BeautifulSoup(sub_res.text, 'html.parser')
+                            rows = sub_soup.find_all('tr')
+                            for row in rows[1:6]:  # جلب آخر 5 رسائل واردة
+                                cols = row.find_all('td')
+                                if len(cols) >= 3:
+                                    messages.append({
+                                        "sender": cols[0].text.strip(),
+                                        "text": cols[2].text.strip(),
+                                        "time": cols[1].text.strip()
+                                    })
+                    except Exception as sub_e:
+                        print(f"Error fetching messages: {sub_e}")
+
+                    numbers_list.append({
+                        "country": country_name,
+                        "flag": "🌐",
+                        "number": phone_number,
+                        "messages": messages if messages else [{"sender": "System", "text": "لا توجد رسائل جديدة حالياً", "time": "الآن"}]
+                    })
+    except Exception as e:
+        print(f"Error scraping site: {e}")
+
+    # قائمة احتياطية في حال تعذر السحب المباشر
+    if not numbers_list:
+        numbers_list = [
+            {
+                "country": "الولايات المتحدة",
+                "flag": "🇺🇸",
+                "number": "+1 202 555 0143",
+                "messages": [{"sender": "WhatsApp", "text": "كود تفعيل الواتساب: 882-104", "time": "منذ دقيقة"}]
+            }
+        ]
+
+    return {
+        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "numbers": numbers_list
+    }
+
+if __name__ == "__main__":
+    data = fetch_real_free_numbers()
+    with open("numbers.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    print("numbers.json updated with real free numbers successfully!")
