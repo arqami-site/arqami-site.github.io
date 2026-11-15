@@ -1,147 +1,158 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أرقامي PRO - استقبال رسائل الواتساب</title>
-<style>
-body{margin:0;font-family:Arial, sans-serif;background:#f1f5f9;text-align:center}
-.top{background:#2563eb;color:#fff;padding:15px;font-size:22px;font-weight:bold}
-.ad{background:#fff;margin:10px;padding:12px;border:2px dashed #f59e0b;border-radius:12px}
-.box{background:#fff;margin:12px auto;max-width:600px;border-radius:16px;padding:15px;text-align:right;box-shadow: 0 2px 4px rgba(0,0,0,0.05)}
-
-.num-container{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;padding:12px 15px;border-radius:10px;margin:10px 0;direction:ltr;}
-.num{font-size:18px;font-weight:bold;color:#0f172a;text-align:left;}
-.btn-group{display:flex;gap:6px;}
-
-button{padding:8px 12px;border-radius:8px;font-weight:bold;font-size:13px;border:none;cursor:pointer;color:#fff;transition:background 0.2s}
-.copy-btn{background:#10b981}
-.copy-btn:hover{background:#059669}
-.inbox-btn{background:#7c3aed}
-.inbox-btn:hover{background:#6d28d9}
-
-.modal {display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);}
-.modal-content {background-color: #fefefe; margin: 15% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; text-align: right; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
-.close {color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer;}
-.close:hover {color: black;}
-
-.msg-item {background: #f1f5f9; padding: 10px; border-radius: 8px; margin: 8px 0; border-right: 4px solid #2563eb; text-align: right;}
-.msg-sender {font-weight: bold; font-size: 13px; color: #2563eb;}
-.msg-text {font-size: 15px; margin: 5px 0; color: #334155; direction: ltr; text-align: right;}
-.msg-time {font-size: 11px; color: #64748b;}
-
-.toast {position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e293b; color: #fff; padding: 10px 20px; border-radius: 8px; display: none; font-size: 14px; z-index: 2000;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أرقامي PRO - رسائل مباشرة وحصرية</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #0044cc;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .ad-box {
+            border: 2px dashed #f0ad4e;
+            background: #fffbe6;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .number-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .number-info {
+            font-size: 16px;
+            font-weight: bold;
+            direction: ltr;
+        }
+        .btn-group {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .btn-copy {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-view {
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .loading {
+            text-align: center;
+            padding: 30px;
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
-<div class="top">⚡ أرقامي PRO - رسائل مباشرة وحصرية</div>
-<div class="ad">📢 إعلان - مساحة إعلانية</div>
-<h3 style="padding: 0 10px;">أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</h3>
+    <header>
+        ⚡ أرقامي PRO - رسائل مباشرة وحصرية
+    </header>
 
-<div id="numbers-container" style="padding: 0 10px;">
-    <p>جاري تحميل الأرقام والرسائل الحية...</p>
-</div>
+    <div class="container">
+        <div class="ad-box">
+            📢 إعلان - مساحة إعلانية
+        </div>
 
-<div id="inboxModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeInbox()">&times;</span>
-    <h3 id="modalNumberTitle" style="margin: 0 0 15px 0; color:#1e293b; direction:rtl; text-align:right;">صندوق الرسائل الواردة</h3>
-    <div id="messagesList"></div>
-  </div>
-</div>
+        <p style="text-align: center; font-weight: bold;">أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</p>
 
-<div id="toast" class="toast">تم نسخ الرقم بنجاح!</div>
+        <!-- مكان عرض الأرقام -->
+        <div id="numbers-container">
+            <div class="loading">جاري تحميل الأرقام...</div>
+        </div>
+    </div>
 
-<script>
-let globalNumbersData = [];
+    <script>
+        const fallbackNumbers = [
+            { country: "اليمن - أرقام متاحة للاستلام الفوري", flag: "🇾🇪", number: "+967 771 1000", link: "#" },
+            { country: "السعودية - أرقام متاحة للاستلام الفوري", flag: "🇸🇦", number: "+966 55 1000000", link: "#" },
+            { country: "مصر - أرقام متاحة للاستلام الفوري", flag: "🇪🇬", number: "+20 10 10000000", link: "#" }
+        ];
 
-fetch('numbers.json?' + new Date().getTime())
-    .then(response => response.json())
-    .then(data => {
-        globalNumbersData = data.numbers;
-        let container = document.getElementById('numbers-container');
-        container.innerHTML = '';
-        
-        let grouped = {};
-        data.numbers.forEach(item => {
-            if (!grouped[item.country]) {
-                grouped[item.country] = { flag: item.flag, items: [] };
-            }
-            grouped[item.country].items.push(item);
-        });
+        function renderNumbers(data) {
+            const container = document.getElementById('numbers-container');
+            container.innerHTML = "";
 
-        for (let country in grouped) {
-            let group = grouped[country];
-            let box = document.createElement('div');
-            box.className = 'box';
-            
-            let html = `<div style="text-align:right; font-weight:bold; margin-bottom:8px;">${group.flag} ${country} - أرقام متاحة للاستلام الفوري</div>`;
-            
-            group.items.forEach((numObj) => {
-                let msgCount = numObj.messages ? numObj.messages.length : 0;
-                html += `
-                <div class="num-container">
-                    <span class="num">${numObj.number}</span>
-                    <div class="btn-group">
-                        <button class="copy-btn" onclick="copyNumber('${numObj.number}')">نسخ الرقم</button>
-                        <button class="inbox-btn" onclick='openInbox(${JSON.stringify(numObj.number)})'>الرسائل (${msgCount})</button>
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'number-card';
+                card.innerHTML = `
+                    <div>
+                        <span>${item.flag || '🌍'}</span> <span>${item.country || 'رقم جديد'}</span>
+                        <div class="number-info">${item.number}</div>
                     </div>
-                </div>`;
+                    <div class="btn-group">
+                        <button class="btn-copy" onclick="copyNumber('${item.number}')">نسخ الرقم</button>
+                        <a href="${item.link || '#'}" class="btn-view" target="_blank">عرض الرسائل هنا</a>
+                    </div>
+                `;
+                container.appendChild(card);
             });
-            
-            box.innerHTML = html;
-            container.appendChild(box);
         }
-    })
-    .catch(error => {
-        document.getElementById('numbers-container').innerHTML = '<p>جاري تحديث البيانات تلقائياً، يرجى تحديث الصفحة بعد قليل.</p>';
-    });
 
-function copyNumber(num) {
-    navigator.clipboard.writeText(num).then(() => {
-        let toast = document.getElementById('toast');
-        toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
-    });
-}
+        function copyNumber(num) {
+            navigator.clipboard.writeText(num);
+            alert("تم نسخ الرقم: " + num);
+        }
 
-function openInbox(phoneNumber) {
-    let targetNum = globalNumbersData.find(n => n.number === phoneNumber);
-    let msgListDiv = document.getElementById('messagesList');
-    document.getElementById('modalNumberTitle').innerHTML = `الرسائل الواردة للرقم: <span style="direction:ltr; display:inline-block;">${phoneNumber}</span>`;
-    
-    msgListDiv.innerHTML = '';
-    
-    if (targetNum && targetNum.messages && targetNum.messages.length > 0) {
-        targetNum.messages.forEach(msg => {
-            msgListDiv.innerHTML += `
-                <div class="msg-item">
-                    <div class="msg-sender">${msg.sender}</div>
-                    <div class="msg-text">${msg.text}</div>
-                    <div class="msg-time">${msg.time}</div>
-                </div>
-            `;
-        });
-    } else {
-        msgListDiv.innerHTML = '<p style="text-align:center; color:#64748b;">لا توجد رسائل جديدة على هذا الرقم حالياً.</p>';
-    }
-    
-    document.getElementById('inboxModal').style.display = 'block';
-}
+        async function loadNumbers() {
+            try {
+                // سحب البيانات تلقائياً من ملف numbers.json الموجود في مستودعك
+                let response = await fetch('numbers.json');
+                if (!response.ok) throw new Error("الملف غير متوفر");
+                let data = await response.json();
+                
+                if (data && data.length > 0) {
+                    renderNumbers(data);
+                } else {
+                    renderNumbers(fallbackNumbers);
+                }
+            } catch (error) {
+                // في حال حدث أي خطأ في قراءة الملف، يتم عرض القائمة الاحتياتية فوراً
+                renderNumbers(fallbackNumbers);
+            }
+        }
 
-function closeInbox() {
-    document.getElementById('inboxModal').style.display = 'none';
-}
-
-window.onclick = function(event) {
-    let modal = document.getElementById('inboxModal');
-    if (event.target == modal) {
-        closeInbox();
-    }
-}
-</script>
-
+        loadNumbers();
+    </script>
 </body>
 </html>
-
