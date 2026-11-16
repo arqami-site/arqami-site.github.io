@@ -155,4 +155,19 @@
         loadNumbers();
     </script>
 </body>
-</html>
+</html><script>
+// إصلاح: يجعل الموقع يقرأ من numbers.json الحقيقي بدل الأرقام الوهمية المكتوبة في index.html
+fetch('numbers.json')
+  .then(r => r.json())
+  .then(data => {
+    const cards = document.querySelectorAll('[class*="card"], div');
+    // نستبدل الأرقام الوهمية بالحقيقية
+    document.body.innerHTML = document.body.innerHTML
+      .replaceAll('+967 771 1000', data.numbers[0].number)
+      .replaceAll('+966 55 1000000', data.numbers[4].number)
+      .replaceAll('+20 10 1000000', data.numbers[6].number)
+      .replaceAll('771 1000', data.numbers[0].number)
+      .replaceAll('55 1000000', data.numbers[4].number);
+    console.log('تم إصلاح الأرقام من numbers.json');
+  });
+</script>
