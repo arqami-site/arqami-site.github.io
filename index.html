@@ -192,4 +192,38 @@ try{
 }catch(e){}
 </script>
 </body>
-</html>
+</html>// === إضافة فقط - جلب رسائل كل الأرقام بدون حذف ===
+let currentNumber = '';
+
+async function loadRealInbox(number){
+  if(number) currentNumber = String(number);
+  let num = currentNumber || document.body.innerText.match(/\+\d{10,15}/)?.[0] || '';
+  let box = document.getElementById('inbox') || document.querySelector('.inbox') || document.querySelector('#msgs');
+  if(box) box.innerHTML = 'جاري جلب الرسائل الحقيقية...';
+  if(!num){ if(box) box.innerHTML = 'اضغط على رقم أولاً ثم تحديث'; return; }
+  try{
+    let clean = String(num).replace(/[^0-9]/g,'');
+    let target = atob('aHR0cHM6Ly9nZXRmcmVlc21zbnVtYmVyLmNvbS9udW1iZXIv') + clean;
+    let proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(target);
+    let r = await fetch(proxy);
+    let t = await r.text();
+    let m = t.match(/رمز[^<]{0,140}/g) || t.match(/code[^<]{0,140}/gi) || [];
+    if(box) box.innerHTML = m.length ? m.slice(0,8).map(x=>'<div class="card">'+x+'</div>').join('') : 'لا توجد رسائل جديدة لهذا الرقم '+num+'، اضغط تحديث بعد دقيقة';
+  }catch(e){
+    if(box) box.innerHTML = 'تعذر الجلب، اضغط تحديث مرة ثانية';
+  }
+}
+
+// يغطي على الدوال القديمة بدون حذفها - أي رقم تضغط عليه يتسجل
+document.addEventListener('click', function(e){
+  let el = e.target.closest('[data-number], .num, .numrow, button');
+  if(el){
+    let txt = (el.getAttribute('data-number') || el.innerText || '').match(/\+\d{10,15}/);
+    if(txt) currentNumber = txt[0];
+  }
+});
+
+// لو الزر القديم ينادي openInbox أو refreshAll، خله يستخدم الرقم الحالي
+function openInbox(n){ loadRealInbox(n || currentNumber); }
+function refreshAll(n){ loadRealInbox(n || currentNumber); }
+// === نهاية الإضافة ===
