@@ -49,25 +49,29 @@ Slovenia|SI|🇸🇮|+38665718942,+38665718939,+38665718919,+38665718917,+386657
 Ukraine|UA|🇺🇦|+380673382170,+380971463459
 China|CN|🇨🇳|+8617051989288,+8616521681192,+8616721919237,+8617108479445
 Kazakhstan|KZ|🇰🇿|+77078394575`;
-let REAL=`+3197058029558=FACEBOOK|072834 es tu código de confirmación de 【entity-Meta¦canonical_name=Meta】.;+3197058029599=FACEBOOK|055348 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3197058029563=IMO|Your imo verification code is 6666.;+3197058029581=FACEBOOK|859951 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3197058029579=TikTok|[TikTok] 2144 is your verification code, valid for 5 minutes.;+12138787418=liv.rent|You received a liv.rent message from Natasha L;+12244010289=FACEBOOK|294778 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+14132784571=FACEBOOK|496595 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3584573989693=Facebook|629605 【entity-Meta¦canonical_name=Meta】 code`;
+let REAL=`+3197058029558=【entity-FACEBOOK¦canonical_name=Facebook】|072834 es tu código de confirmación de 【entity-Meta¦canonical_name=Meta】.;+3197058029599=【entity-FACEBOOK¦canonical_name=Facebook】|055348 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3197058029563=IMO|Your imo verification code is 6666.;+3197058029581=【entity-FACEBOOK¦canonical_name=Facebook】|859951 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3197058029579=TikTok|[TikTok] 2144 is your verification code, valid for 5 minutes.;+12138787418=liv.rent|You received a liv.rent message from Natasha L;+12244010289=【entity-FACEBOOK¦canonical_name=Facebook】|294778 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+14132784571=【entity-FACEBOOK¦canonical_name=Facebook】|496595 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.;+3584573989693=【entity-Facebook¦canonical_name=Facebook】|629605 【entity-Meta¦canonical_name=Meta】 code`;
 let realMap={}; REAL.split(';').forEach(p=>{let i=p.indexOf('='); if(i>0) realMap[p.slice(0,i)]=p.slice(i+1);});
 let allNumbers=[]; RAW.trim().split('\n').forEach(line=>{let parts=line.split('|'); let country=parts[0], code=parts[1], flag=parts[2], nums=parts[3].split(','); nums.forEach(n=>{let rm=realMap[n]||'System|اضغط تحديث لعرض أحدث رسالة حقيقية'; let sp=rm.split('|'); allNumbers.push({country:country,code:code,flag:flag,number:n,messages:[{sender:sp[0],text:sp[1],time:'الآن'}]});});});
 let curCountry='United States'; let curNumber=null;
 const PROXY = "https://api.allorigins.win/raw?url=";
 async function getRealMessages(num){
   try{
-    const clean = num.replace(/[^0-9]/g,"");
-    const r = await fetch(PROXY + encodeURIComponent("https://receive-sms-free.cc/"));
-    const t = await r.text();
-    const idx = t.indexOf(clean.slice(-6));
-    if(idx > -1) return [{sender:"Live", text: t.slice(Math.max(0, idx-100), idx+300).replace(/<[^>]+>/g," ").slice(0,300), time:"الآن"}];
+    let clean = String(num).replace(/[^0-9]/g,'');
+    let target = atob('aHR0cHM6Ly9nZXRmcmVlc21zbnVtYmVyLmNvbS92aXJ0dWFsLXBob25lL3At') + clean;
+    let urls = [PROXY + encodeURIComponent(target), 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(target)];
+    let t = '';
+    for(let u of urls){ try{ let r = await fetch(u); t = await r.text(); if(t && t.length > 1000) break; }catch(e){} }
+    if(!t) return null;
+    let text = t.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ');
+    let out = [];
+    text.split('\n').forEach(line=>{ line=line.trim(); if(line.length>10 && /imo|رمز|code|verification|【entity-WhatsApp¦canonical_name=WhatsApp】|【entity-Facebook¦canonical_name=Facebook】|Google|Telegram|TikTok/i.test(line)){ if(!out.find(o=>o.text===line.slice(0,220))) out.push({sender:'Live', text: line.slice(0,220), time:'الآن'}); } });
+    if(out.length) return out.slice(0,8);
+    let codes = text.match(/\b\d{4,8}\b/g);
+    if(codes) return [{sender:'Live', text:'آخر كود في صفحة الرقم: '+codes[0], time:'الآن'}];
   }catch(e){}
   return null;
 }
-async function refreshAll(){
-  for(let n of allNumbers){ const m = await getRealMessages(n.number); if(m) n.messages = m; }
-  renderDetail();
-}
+async function refreshAll(){ if(curNumber) await refreshOne(); }
 function copyNumber(num){ try{navigator.clipboard.writeText(num);}catch(e){} alert('تم النسخ: '+num); }
 function copyCode(txt){ try{navigator.clipboard.writeText((txt.match(/\d{4,6}/)||[''])[0]);}catch(e){} alert('تم نسخ الكود'); }
 function showCountries(){
@@ -97,6 +101,7 @@ function showDetail(num){
   document.getElementById('viewNumbers').style.display='none';
   document.getElementById('viewDetail').style.display='block';
   window.scrollTo(0,0);
+  refreshOne();
 }
 function renderDetail(){
   if(!curNumber) return;
@@ -105,10 +110,10 @@ function renderDetail(){
   h+='<div style="display:flex;justify-content:space-between;margin-top:10px"><span>✅ يدعم واتساب</span><span>'+it.flag+' '+it.country+'</span></div>';
   h+='<div class="greenbar">● متصل الآن! '+it.flag+' '+it.number+'</div>';
   h+='<div class="btnrow"><button class="b-black" onclick="copyNumber(\''+it.number+'\')">📋 نسخ الرقم</button><button class="b-blue" onclick="refreshOne()">تحديث الرسائل النصية</button><button class="b-grey" onclick="nextNumber()">تغيير الرقم</button><button class="b-green">رقم مميز</button></div>';
-  h+='<div style="display:flex;justify-content:space-between"><b>الرسائل الواردة - تظهر كأنها من موقعك</b><span class="small">تحديث تلقائي كل 15 ثانية • معاينة - ضع رابط السيرفر للحقيقية</span></div>';
+  h+='<div style="display:flex;justify-content:space-between"><b>الرسائل الواردة - تظهر كأنها من موقعك</b><span class="small">تحديث تلقائي كل 15 ثانية</span></div>';
+  h+='<div id="inbox"></div>';
   it.messages.forEach(m=>{
-    let code=(m.text.match(/\d{4,6}/)||[''])[0];
-    h+='<div class="card"><div style="display:flex;justify-content:space-between"><b>'+m.sender+'</b><button class="copycode" onclick="copyCode(\''+m.text.replace(/'/g,'')+'\')">📋 نسخ الكود</button></div><div style="margin-top:8px">'+m.text+'</div><div class="small">- الآن</div></div>';
+    h+='<div class="card"><div style="display:flex;justify-content:space-between"><b>'+m.sender+'</b><button class="copycode" onclick="copyCode(\''+m.text.replace(/\'/g,'')+'\')">📋 نسخ الكود</button></div><div style="margin-top:8px">'+m.text+'</div><div class="small">- الآن</div></div>';
   });
   h+='<div class="small" style="text-align:center">عرض الرسائل الحقيقية يتم عبر نفس الربط السابق - بدون تغيير - PROXY</div>';
   document.getElementById('viewDetail').innerHTML=h;
@@ -116,8 +121,10 @@ function renderDetail(){
 async function refreshOne(){
   if(!curNumber) return;
   let it=allNumbers.find(n=>n.number===curNumber);
-  let m=await getRealMessages(curNumber); if(m) it.messages=m;
-  renderDetail();
+  let box=document.getElementById('inbox'); if(box) box.innerHTML='<div class="card">جاري جلب الرسائل الحقيقية...</div>';
+  let m=await getRealMessages(curNumber);
+  if(m){ it.messages=m; renderDetail(); }
+  else if(box){ box.innerHTML='<div class="card">لا توجد رسائل جديدة لهذا الرقم، اضغط تحديث بعد دقيقة</div>'; }
 }
 function nextNumber(){
   let list=allNumbers.filter(n=>n.country===curCountry);
@@ -134,7 +141,6 @@ function addMyNumber(){
 function setLang(l){ alert('Language: '+l); }
 showCountries();
 setInterval(()=>{ if(curNumber) refreshOne(); },15000);
-  // ===== جلب أرقام جديدة كل يوم من الموقعين - بدون تغيير الشكل ولا الربط =====
 function guessCountry(num){
   if(num.startsWith('+1')) return {country:'United States',code:'US',flag:'🇺🇸'};
   if(num.startsWith('+31')) return {country:'Netherlands',code:'NL',flag:'🇳🇱'};
@@ -148,82 +154,20 @@ function guessCountry(num){
 }
 async function fetchDailyNumbers(){
   let today = new Date().toDateString();
-  let last = '';
-  try{ last = localStorage.getItem('lastFetchDay') || ''; }catch(e){}
-  if(last === today) return; // اليوم سحبنا خلاص، لا تسحب مرة ثانية
+  let last = ''; try{ last = localStorage.getItem('lastFetchDay') || ''; }catch(e){}
+  if(last === today) return;
   let found = [];
   let urls = ["https://receive-sms-free.cc/", "https://getfreesmsnumber.com/"];
   for(let u of urls){
-    try{
-      const r = await fetch(PROXY + encodeURIComponent(u));
-      const t = await r.text();
-      // دور على كل الأرقام اللي شكلها + ورقم
-      let matches = t.match(/\+\d{7,15}/g) || [];
-      matches.forEach(m=>{
-        let clean = m.replace(/[^0-9+]/g,"");
-        if(clean.length >= 10 && clean.length <= 16) found.push(clean);
-      });
-    }catch(e){}
+    try{ const r = await fetch(PROXY + encodeURIComponent(u)); const t = await r.text(); let matches = t.match(/\+\d{7,15}/g) || []; matches.forEach(m=>{ let clean = m.replace(/[^0-9+]/g,""); if(clean.length >= 10 && clean.length <= 16) found.push(clean); }); }catch(e){}
   }
   let added = 0;
-  found.forEach(num=>{
-    if(!allNumbers.find(n=>n.number===num)){
-      let g = guessCountry(num);
-      allNumbers.push({country:g.country,code:g.code,flag:g.flag,number:num,messages:[{sender:'New',text:'رقم جديد اليوم - اضغط تحديث لعرض أحدث رسالة حقيقية',time:'الآن'}]});
-      added++;
-    }
-  });
-  try{
-    localStorage.setItem('lastFetchDay', today);
-    localStorage.setItem('dailyNumbers', JSON.stringify(allNumbers.slice(130)));
-  }catch(e){}
-  if(added > 0){
-    showCountries();
-    alert('تمت إضافة '+added+' رقم جديد اليوم من الموقعين');
-  }
+  found.forEach(num=>{ if(!allNumbers.find(n=>n.number===num)){ let g = guessCountry(num); allNumbers.push({country:g.country,code:g.code,flag:g.flag,number:num,messages:[{sender:'New',text:'رقم جديد اليوم - اضغط تحديث لعرض أحدث رسالة حقيقية',time:'الآن'}]}); added++; } });
+  try{ localStorage.setItem('lastFetchDay', today); localStorage.setItem('dailyNumbers', JSON.stringify(allNumbers.slice(130))); }catch(e){}
+  if(added > 0){ showCountries(); }
 }
-// شغل السحب اليومي أول ما يفتح الموقع
 fetchDailyNumbers();
-// لو فيه أرقام محفوظة من أمس، رجعها
-try{
-  let saved = JSON.parse(localStorage.getItem('dailyNumbers') || '[]');
-  saved.forEach(n=>{ if(!allNumbers.find(x=>x.number===n.number)) allNumbers.push(n); });
-  if(saved.length > 0) showCountries();
-}catch(e){}
+try{ let saved = JSON.parse(localStorage.getItem('dailyNumbers') || '[]'); saved.forEach(n=>{ if(!allNumbers.find(x=>x.number===n.number)) allNumbers.push(n); }); if(saved.length > 0) showCountries(); }catch(e){}
 </script>
 </body>
-</html>// === إضافة فقط - جلب رسائل كل الأرقام بدون حذف ===
-let currentNumber = '';
-
-async function loadRealInbox(number){
-  if(number) currentNumber = String(number);
-  let num = currentNumber || document.body.innerText.match(/\+\d{10,15}/)?.[0] || '';
-  let box = document.getElementById('inbox') || document.querySelector('.inbox') || document.querySelector('#msgs');
-  if(box) box.innerHTML = 'جاري جلب الرسائل الحقيقية...';
-  if(!num){ if(box) box.innerHTML = 'اضغط على رقم أولاً ثم تحديث'; return; }
-  try{
-    let clean = String(num).replace(/[^0-9]/g,'');
-    let target = atob('aHR0cHM6Ly9nZXRmcmVlc21zbnVtYmVyLmNvbS9udW1iZXIv') + clean;
-    let proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(target);
-    let r = await fetch(proxy);
-    let t = await r.text();
-    let m = t.match(/رمز[^<]{0,140}/g) || t.match(/code[^<]{0,140}/gi) || [];
-    if(box) box.innerHTML = m.length ? m.slice(0,8).map(x=>'<div class="card">'+x+'</div>').join('') : 'لا توجد رسائل جديدة لهذا الرقم '+num+'، اضغط تحديث بعد دقيقة';
-  }catch(e){
-    if(box) box.innerHTML = 'تعذر الجلب، اضغط تحديث مرة ثانية';
-  }
-}
-
-// يغطي على الدوال القديمة بدون حذفها - أي رقم تضغط عليه يتسجل
-document.addEventListener('click', function(e){
-  let el = e.target.closest('[data-number], .num, .numrow, button');
-  if(el){
-    let txt = (el.getAttribute('data-number') || el.innerText || '').match(/\+\d{10,15}/);
-    if(txt) currentNumber = txt[0];
-  }
-});
-
-// لو الزر القديم ينادي openInbox أو refreshAll، خله يستخدم الرقم الحالي
-function openInbox(n){ loadRealInbox(n || currentNumber); }
-function refreshAll(n){ loadRealInbox(n || currentNumber); }
-// === نهاية الإضافة ===
+</html>
