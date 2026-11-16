@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://arqami-site.github.io/-arqami-site/sitemap.xml
