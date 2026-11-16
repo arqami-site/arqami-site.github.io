@@ -1,1 +1,55 @@
 
+import json
+import os
+
+# هيكل بيانات تجريبي منظم وجاهز للعرض الفوري بدون أخطاء
+data = [
+    {
+        "country": "United States",
+        "flag": "🇺🇸",
+        "numbers": [
+            {
+                "num": "+14075449125",
+                "messages": [
+                    {"sender": "WhatsApp", "text": "رمز تحقيق واتساب: 123-456", "time": "منذ دقيقة"}
+                ]
+            },
+            {
+                "num": "+14132784571",
+                "messages": [
+                    {"sender": "Google", "text": "رمز تأكيد حسابك جوجل: 987654", "time": "منذ 5 دقائق"}
+                ]
+            }
+        ]
+    },
+    {
+        "country": "Netherlands",
+        "flag": "🇳🇱",
+        "numbers": [
+            {
+                "num": "+3197058029579",
+                "messages": [
+                    {"sender": "TikTok", "text": "[TikTok] 2144 is your verification code.", "time": "منذ دقيقتين"}
+                ]
+            }
+        ]
+    },
+    {
+        "country": "Belgium",
+        "flag": "🇧🇪",
+        "numbers": [
+            {
+                "num": "+32463001897",
+                "messages": [
+                    {"sender": "Telegram", "text": "Telegram login code: 55432", "time": "الآن"}
+                ]
+            }
+        ]
+    }
+]
+
+# حفظ البيانات في ملف numbers.json ليقرأه الموقع فوراً
+with open("numbers.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
+
+print("تم تحديث ملف numbers.json بنجاح!")
