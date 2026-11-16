@@ -134,6 +134,62 @@ function addMyNumber(){
 function setLang(l){ alert('Language: '+l); }
 showCountries();
 setInterval(()=>{ if(curNumber) refreshOne(); },15000);
+  // ===== جلب أرقام جديدة كل يوم من الموقعين - بدون تغيير الشكل ولا الربط =====
+function guessCountry(num){
+  if(num.startsWith('+1')) return {country:'United States',code:'US',flag:'🇺🇸'};
+  if(num.startsWith('+31')) return {country:'Netherlands',code:'NL',flag:'🇳🇱'};
+  if(num.startsWith('+358')) return {country:'Finland',code:'FI',flag:'🇫🇮'};
+  if(num.startsWith('+32')) return {country:'Belgium',code:'BE',flag:'🇧🇪'};
+  if(num.startsWith('+386')) return {country:'Slovenia',code:'SI',flag:'🇸🇮'};
+  if(num.startsWith('+380')) return {country:'Ukraine',code:'UA',flag:'🇺🇦'};
+  if(num.startsWith('+86')) return {country:'China',code:'CN',flag:'🇨🇳'};
+  if(num.startsWith('+77')) return {country:'Kazakhstan',code:'KZ',flag:'🇰🇿'};
+  return {country:'United States',code:'US',flag:'🌍'};
+}
+async function fetchDailyNumbers(){
+  let today = new Date().toDateString();
+  let last = '';
+  try{ last = localStorage.getItem('lastFetchDay') || ''; }catch(e){}
+  if(last === today) return; // اليوم سحبنا خلاص، لا تسحب مرة ثانية
+  let found = [];
+  let urls = ["https://receive-sms-free.cc/", "https://getfreesmsnumber.com/"];
+  for(let u of urls){
+    try{
+      const r = await fetch(PROXY + encodeURIComponent(u));
+      const t = await r.text();
+      // دور على كل الأرقام اللي شكلها + ورقم
+      let matches = t.match(/\+\d{7,15}/g) || [];
+      matches.forEach(m=>{
+        let clean = m.replace(/[^0-9+]/g,"");
+        if(clean.length >= 10 && clean.length <= 16) found.push(clean);
+      });
+    }catch(e){}
+  }
+  let added = 0;
+  found.forEach(num=>{
+    if(!allNumbers.find(n=>n.number===num)){
+      let g = guessCountry(num);
+      allNumbers.push({country:g.country,code:g.code,flag:g.flag,number:num,messages:[{sender:'New',text:'رقم جديد اليوم - اضغط تحديث لعرض أحدث رسالة حقيقية',time:'الآن'}]});
+      added++;
+    }
+  });
+  try{
+    localStorage.setItem('lastFetchDay', today);
+    localStorage.setItem('dailyNumbers', JSON.stringify(allNumbers.slice(130)));
+  }catch(e){}
+  if(added > 0){
+    showCountries();
+    alert('تمت إضافة '+added+' رقم جديد اليوم من الموقعين');
+  }
+}
+// شغل السحب اليومي أول ما يفتح الموقع
+fetchDailyNumbers();
+// لو فيه أرقام محفوظة من أمس، رجعها
+try{
+  let saved = JSON.parse(localStorage.getItem('dailyNumbers') || '[]');
+  saved.forEach(n=>{ if(!allNumbers.find(x=>x.number===n.number)) allNumbers.push(n); });
+  if(saved.length > 0) showCountries();
+}catch(e){}
 </script>
 </body>
 </html>
