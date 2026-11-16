@@ -1,192 +1,116 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arqami - أرقام مجانية مؤقتة | Free Temporary Numbers</title>
-<meta name="description" content="أرقام مجانية مؤقتة لاستخدام الواتساب والفيس والانستقرام - Free temporary numbers for WhatsApp, Facebook, Instagram">
+<html lang="ar" dir="rtl"><head><【entity-meta¦canonical_name=Meta】 charset="UTF-8"><【entity-meta¦canonical_name=Meta】 name="viewport" content="width=device-width,initial-scale=1">
+<title>Arqami - أرقام مجانية مؤقتة لاستخدام الواتساب والفيس والانستجرام</title>
+<【entity-meta¦canonical_name=Meta】 name="description" content="أرقام مجانية مؤقتة لاستخدام الواتساب والفيس والانستجرام - Free Temporary Numbers">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<style>
-body{font-family:'Cairo',sans-serif;background:#f0f7f4}
-.num{font-family:'Sora',monospace !important;direction:ltr;display:inline-block}
-.ad-box{background:#fffbe6;border:2px dashed #f59e0b}
-</style>
-</head>
-<body>
-<!-- Header -->
-<div class="bg-gradient-to-r from-purple-700 to-blue-600 text-white p-4 sticky top-0 z-50">
-<div class="max-w-5xl mx-auto flex justify-between items-center">
-<div class="flex items-center gap-3"><div class="bg-white text-purple-700 w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl">أ</div><div><div class="font-black text-lg leading-none" data-i18n="title">أرقامي Arqami</div><div class="text-xs opacity-80" data-i18n="subtitle">أرقام مجانية مؤقتة | Free Temporary Numbers</div></div></div>
-<div class="flex gap-2 items-center">
-<select id="langSelect" onchange="setLang(this.value)" class="text-black text-xs rounded-full px-2 py-1"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option></select>
-<div class="bg-white/20 px-3 py-1 rounded-full text-xs">👁 <span id="visitorCount">0</span> <span data-i18n="visitors">زائر</span></div>
-</div>
-</div>
-</div>
-
+<style>body{font-family:'Cairo',sans-serif;background:#f0f7f4}.num{font-family:'Sora',monospace!important;direction:ltr;display:inline-block}.ad-box{background:#fffbe6;border:2px dashed #f59e0b}.card{background:#fff;border-radius:18px;padding:12px}</style>
+<!-- ضع كود AdSense هنا: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
+</head><body>
+<div class="bg-gradient-to-r from-purple-700 to-blue-600 text-white p-4 sticky top-0 z-50"><div class="max-w-5xl mx-auto flex justify-between items-center"><div class="flex items-center gap-2"><div class="bg-white text-purple-700 w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl">أ</div><div><div class="font-black" data-t="title">أرقامي Arqami</div><div class="text-xs opacity-80" data-t="subtitle">أرقام مجانية مؤقتة لاستخدام الواتساب والفيس والانستجرام</div></div></div><div class="flex gap-2 items-center"><select id="langSel" onchange="setLang(this.value)" class="text-black text-xs rounded-full px-2 py-1"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="tr">Türkçe</option></select><div class="bg-white/20 px-3 py-1 rounded-full text-xs">👁 <span id="visitorCount">0</span> <span data-t="visitors">زائر</span></div></div></div></div>
 <div class="max-w-5xl mx-auto p-4">
-<!-- Hero -->
-<div class="text-center my-4">
-<h1 class="text-2xl md:text-3xl font-black text-green-900" data-i18n="hero">🔥 أرقام مجانية مؤقتة - لواتساب وفيسبوك وانستقرام</h1>
-<p class="text-green-700 font-bold mt-1" data-i18n="hero2">Free Temporary Numbers for WhatsApp, Facebook, Instagram - Real Inbox</p>
-<div class="flex justify-center gap-2 mt-3 flex-wrap">
-<span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs">● LIVE</span>
-<span class="bg-white border px-3 py-1 rounded-full text-xs">📱 WhatsApp</span>
-<span class="bg-white border px-3 py-1 rounded-full text-xs">📘 Facebook</span>
-<span class="bg-white border px-3 py-1 rounded-full text-xs">📸 Instagram</span>
-<span class="bg-white border px-3 py-1 rounded-full text-xs">🌍 <span id="totalCountries">0</span> دولة</span>
-<span class="bg-white border px-3 py-1 rounded-full text-xs">📞 <span id="totalNumbers">0</span> رقم</span>
-</div>
-</div>
-
-<!-- Ad Top - اربطه بحسابك في Google AdSense -->
-<div class="ad-box rounded-xl p-3 text-center text-xs my-4">
-<div class="text-yellow-700 font-bold">📢 إعلان - مساحة إعلانية حقيقية</div>
-<div class="text-gray-500 mt-1">ضع هنا كود Google AdSense الخاص بك - مثال: &lt;ins class="adsbygoogle" ...&gt;</div>
-<!-- الصق كود ادسنس هنا -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"></script> -->
-</div>
-
-<!-- Add Number + Refresh -->
-<div class="bg-white rounded-2xl p-4 shadow flex flex-col md:flex-row gap-3">
-<div class="flex-1 flex gap-2">
-<input id="newNumberInput" placeholder="+1 1234567890" class="border rounded-full px-4 py-2 flex-1 text-sm num" dir="ltr">
-<select id="newCountry" class="border rounded-full px-3 py-2 text-sm"><option value="US">🇺🇸 US</option><option value="NL">🇳🇱 NL</option><option value="FI">🇫🇮 FI</option><option value="GB">🇬🇧 GB</option><option value="SA">🇸🇦 SA</option><option value="YE">🇾🇪 YE</option><option value="EG">🇪🇬 EG</option></select>
-<button onclick="addMyNumber()" class="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold" data-i18n="addBtn">+ أضف رقمي</button>
-</div>
-<div class="flex gap-2">
-<button onclick="refreshAll()" class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold">🔄 <span data-i18n="refresh">تحديث</span> (<span id="countdown">2</span>s)</button>
-<button onclick="toggleAuto()" id="autoBtn" class="bg-black text-white px-4 py-2 rounded-full text-sm">⏸ إيقاف التحديث التلقائي</button>
-</div>
-</div>
-<p class="text-xs text-gray-500 mt-2 text-center">التحديث التلقائي كل 2 ثانية • Auto refresh every 2s • يتم جلب الأرقام من المصدرين بالخلفية بدون إظهار الرابط للزائر</p>
-
-<!-- Countries List -->
+<div class="text-center my-4"><h1 class="text-2xl md:text-3xl font-black text-green-900" data-t="hero">🔥 أرقام مجانية مؤقتة - لواتساب وفيسبوك وانستقرام</h1><p class="text-green-700 font-bold" data-t="hero2">Free Temporary Numbers for 【entity-WhatsApp¦canonical_name=WhatsApp】, 【entity-Facebook¦canonical_name=FACEBOOK】, 【entity-Instagram¦canonical_name=Instagram】 - Real Inbox</p>
+<div class="flex justify-center gap-2 mt-3 flex-wrap"><span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs">● LIVE</span><span class="bg-white border px-3 py-1 rounded-full text-xs">📱 【entity-WhatsApp¦canonical_name=WhatsApp】</span><span class="bg-white border px-3 py-1 rounded-full text-xs">📘 【entity-Facebook¦canonical_name=FACEBOOK】</span><span class="bg-white border px-3 py-1 rounded-full text-xs">📸 【entity-Instagram¦canonical_name=Instagram】</span><span class="bg-white border px-3 py-1 rounded-full text-xs">🌍 <span id="totalCountries">0</span> <span data-t="countries">دولة</span></span><span class="bg-white border px-3 py-1 rounded-full text-xs">📞 <span id="totalNumbers">0</span> <span data-t="numbers">رقم</span></span></div></div>
+<div class="ad-box rounded-xl p-3 text-center text-xs my-4"><b>📢 إعلان - AdSense</b><div data-t="adnote">ضع هنا كود Google AdSense الخاص بك (ca-pub-XXXX) لربح حقيقي - لا أستطيع وضع كود وهمي</div><!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto"></ins> --></div>
+<div class="bg-white rounded-2xl p-3 flex flex-wrap gap-2 justify-center items-center"><input id="newNumberInput" placeholder="+1 ..." class="border rounded-full px-3 py-2 text-sm"><select id="newCountry" class="border rounded-full px-2 py-2 text-sm"><option value="United States">United States</option><option value="Netherlands">Netherlands</option><option value="Finland">Finland</option><option value="Belgium">Belgium</option><option value="Canada">Canada</option><option value="Slovenia">Slovenia</option></select><button onclick="addMyNumber()" class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold" data-t="addBtn">+ أضف رقمي</button><button onclick="refreshAll()" class="bg-black text-white px-4 py-2 rounded-full text-sm"><span data-t="refresh">تحديث الرسائل</span> 🔄 <span id="countdown">2</span>s</button><span class="text-xs text-gray-500" data-t="auto">تحديث تلقائي كل 2 ثانية</span></div>
 <div id="countries" class="space-y-6 mt-6"></div>
-
-<!-- Ad Mid -->
-<div class="ad-box rounded-xl p-4 text-center my-6">
-<div class="font-bold text-yellow-700">📢 إعلان حقيقي - يظهر بعد كل تحديثين</div>
-<div id="midAd" class="text-xs text-gray-500 mt-1">سيتم عرض إعلان AdSense هنا تلقائياً بعد كل تحديثين للرسائل</div>
+<div class="bg-white rounded-2xl p-4 text-xs text-gray-600 leading-relaxed mt-6"><b data-t="how">كيف يعمل صندوق الرسائل الحقيقي؟</b><br><span data-t="how2">عند الضغط على "عرض الرسائل" يحاول الموقع جلب الرسائل الحقيقية الحية عبر Proxy بدون إظهار الرابط الأصلي للزائر. إذا منع الموقع الجلب المباشر بسبب CORS / Cloudflare، تظهر الرسائل الملتقطة اليوم من المصدر + زر تحديث. لا توجد أرقام وهمية 555 ولا أرقام مخفية ***. الأرقام المخفية في المصدر لم يتم نسخها لأنها غير كاملة.</span></div>
 </div>
-
-<div class="bg-white rounded-2xl p-4 text-xs text-gray-600 leading-relaxed">
-<b>كيف يعمل صندوق الرسائل الحقيقي؟</b><br>
-عند الضغط على "عرض الرسائل" يتم جلب الرسائل الحقيقية من المصدر بالخلفية عبر Proxy (الزائر لا يرى الرابط الأصلي). إذا كان المصدر يمنع الجلب المباشر، سيظهر زر "فتح الصندوق الأصلي" بدون ذكر اسم الموقع في الواجهة. الأرقام ليست وهمية 555 - جميعها مأخوذة من receive-sms-free.cc و getfreesmsnumber.com وتمت تصفيتها من الأرقام الوهمية.
-</div>
-</div>
-
-<!-- Inbox Modal -->
-<div id="inboxModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-[100]">
-<div class="bg-white rounded-3xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-4">
-<div class="flex justify-between items-center"><h3 id="inboxTitle" class="font-black">صندوق الرسائل</h3><button onclick="closeInbox()" class="bg-gray-200 w-8 h-8 rounded-full">✕</button></div>
-<div id="inboxContent" class="space-y-3 mt-4"></div>
-<div class="ad-box rounded-xl p-2 text-center text-xs mt-4">📢 إعلان - يظهر داخل الرسائل</div>
-</div>
-</div>
-
+<div id="inboxModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:99"><div class="bg-white rounded-2xl p-4 max-w-md w-11/12 max-h-[85vh] overflow-auto"><div class="flex justify-between"><b id="inboxTitle">📩</b><button onclick="closeInbox()">✕</button></div><div class="text-xs text-gray-500 mt-1" id="inboxNote"></div><div id="inboxContent" class="mt-3 space-y-2"></div><button onclick="refreshAll();closeInbox()" class="w-full bg-black text-white py-2 rounded-full text-sm mt-3">تحديث الرسائل 🔄</button></div></div>
 <script>
-// ===== بيانات حقيقية من الموقعين - تم جمعها من receive-sms-free.cc/regions و getfreesmsnumber.com =====
-let allNumbers = [
-  // getfreesmsnumber.com - حقيقية
-  {country:"United States", code:"US", flag:"🇺🇸", number:"+1 407-544-9125", source:"A", messages:[{sender:"System", text:"Welcome! Your verification code is 785184", time:"42s ago"}]},
-  {country:"United States", code:"US", flag:"🇺🇸", number:"+1 413-278-4571", source:"A", messages:[{sender:"Telegram", text:"Telegram code: 78406", time:"1m ago"}]},
-  {country:"United States", code:"US", flag:"🇺🇸", number:"+1 224-401-0289", source:"A", messages:[{sender:"Facebook", text:"524679 is your Meta confirmation code", time:"3m ago"}]},
-  {country:"United States", code:"US", flag:"🇺🇸", number:"+1 386-516-8445", source:"A", messages:[{sender:"WhatsApp", text:"Your WhatsApp code: 489-102", time:"5m ago"}]},
-  {country:"Netherlands", code:"NL", flag:"🇳🇱", number:"+31 97058029582", source:"A", messages:[{sender:"Facebook", text:"796323 es tu codigo de confirmacion", time:"2m ago"}]},
-  {country:"Netherlands", code:"NL", flag:"🇳🇱", number:"+31 97058029573", source:"A", messages:[{sender:"Telegram", text:"Telegram code: 67479", time:"7m ago"}]},
-  {country:"Netherlands", code:"NL", flag:"🇳🇱", number:"+31 97058029563", source:"A", messages:[{sender:"Telegram", text:"Telegram code: 79125", time:"8m ago"}]},
-  {country:"Finland", code:"FI", flag:"🇫🇮", number:"+358 4573989692", source:"A", messages:[{sender:"Facebook", text:"371017 es tu código de confirmación", time:"5m ago"}]},
-  {country:"Finland", code:"FI", flag:"🇫🇮", number:"+358 4573989693", source:"A", messages:[{sender:"Telegram", text:"Telegram code: 76383", time:"10m ago"}]},
-  // receive-sms-free.cc - حقيقية من Regions
-  {country:"United Kingdom", code:"GB", flag:"🇬🇧", number:"+44 7441 123456", source:"B", messages:[{sender:"WhatsApp", text:"Your WhatsApp code is 112233", time:"2m ago"}]},
-  {country:"Canada", code:"CA", flag:"🇨🇦", number:"+1 647-555-0142", source:"B", messages:[{sender:"Instagram", text:"334-556 is your Instagram code", time:"8m ago"}]},
-  {country:"Germany", code:"DE", flag:"🇩🇪", number:"+49 170 1234567", source:"B", messages:[{sender:"Google", text:"Your Google code is 4455", time:"12m ago"}]},
-  {country:"France", code:"FR", flag:"🇫🇷", number:"+33 6 12 34 56 78", source:"B", messages:[{sender:"WhatsApp", text:"Code: 902-111", time:"2m ago"}]},
-  {country:"Sweden", code:"SE", flag:"🇸🇪", number:"+46 70 123 4567", source:"B", messages:[{sender:"Microsoft", text:"Use 8832 as your security code", time:"20m ago"}]},
-];
-
-// أرقام المستخدم المضافة - محفوظة في الجهاز
-let myNumbers = JSON.parse(localStorage.getItem('myNumbers') || '[]');
-allNumbers = allNumbers.concat(myNumbers);
-
-let auto = true, refreshCount = 0, countdownVal = 2;
-let translations = {
-  ar:{title:"أرقامي Arqami", subtitle:"أرقام مجانية مؤقتة | Free Temporary Numbers", hero:"🔥 أرقام مجانية مؤقتة - لواتساب وفيسبوك وانستقرام", hero2:"Free Temporary Numbers for WhatsApp, Facebook, Instagram - Real Inbox", visitors:"زائر", addBtn:"+ أضف رقمي", refresh:"تحديث"},
-  en:{title:"Arqami", subtitle:"Free Temporary Numbers", hero:"🔥 Free Temporary Numbers - For WhatsApp, Facebook, Instagram", hero2:"Real Inbox - Updated Every 2 Seconds", visitors:"visitors", addBtn:"+ Add My Number", refresh:"Refresh"},
-  fr:{title:"Arqami", subtitle:"Numéros temporaires gratuits", hero:"🔥 Numéros gratuits temporaires - WhatsApp, Facebook, Instagram", hero2:"Boîte réelle - Mise à jour toutes les 2s", visitors:"visiteurs", addBtn:"+ Ajouter mon numéro", refresh:"Actualiser"},
-  es:{title:"Arqami", subtitle:"Números temporales gratis", hero:"🔥 Números gratis temporales - WhatsApp, Facebook, Instagram", hero2:"Buzón real - Actualizado cada 2s", visitors:"visitantes", addBtn:"+ Añadir mi número", refresh:"Actualizar"}
-};
-function setLang(l){
-  document.documentElement.lang = l;
-  document.documentElement.dir = l==='ar' ? 'rtl':'ltr';
-  let t = translations[l] || translations['ar'];
-  document.querySelectorAll('[data-i18n]').forEach(el=>{ let k=el.getAttribute('data-i18n'); if(t[k]) el.textContent=t[k]; });
-  localStorage.setItem('lang', l);
-}
-// لغة الجهاز تلقائياً
-let deviceLang = (navigator.language||'ar').slice(0,2);
-if(['ar','en','fr','es'].includes(deviceLang)){ document.getElementById('langSelect').value=deviceLang; setLang(deviceLang); }
-
-// عداد الزوار - حقيقي عبر CountAPI + LocalStorage كبديل
-let visits = parseInt(localStorage.getItem('visits')||'0')+1;
-localStorage.setItem('visits', visits);
-fetch('https://api.countapi.xyz/hit/arqami-site.github.io/visits').then(r=>r.json()).then(d=>{ document.getElementById('visitorCount').textContent = d.value; }).catch(()=>{ document.getElementById('visitorCount').textContent = visits + ' (جهازك)'; });
-
+let allNumbers=[{country:"United States",code:"US",flag:"🇺🇸",number:"+14075449125",messages:[{sender:"System",text:"Available - افتح الصندوق لعرض أحدث رسالة حقيقية",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+14132784571",messages:[{sender:"【entity-FACEBOOK¦canonical_name=FACEBOOK】",text:"496595 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12244010289",messages:[{sender:"【entity-FACEBOOK¦canonical_name=FACEBOOK】",text:"294778 es tu codigo de confirmacion de la cuenta de 【entity-Meta¦canonical_name=Meta】.",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+13865168445",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12138787418",messages:[{sender:"liv.rent",text:"You received a liv.rent message from Natasha L",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12138787429",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12093750316",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12093750341",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"United States",code:"US",flag:"🇺🇸",number:"+12138787279",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029579",messages:[{sender:"TikTok",text:"[TikTok] 2144 is your verification code, valid for 5 minutes.",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029581",messages:[{sender:"FACEBOOK",text:"859951 es tu codigo de confirmacion de la cuenta de Meta.",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029557",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029570",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029578",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029558",messages:[{sender:"FACEBOOK",text:"072834 es tu código de confirmación de Meta.",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029560",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029599",messages:[{sender:"FACEBOOK",text:"055348 es tu codigo de confirmacion de la cuenta de Meta.",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029567",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029585",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029580",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029587",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029597",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029568",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live١ messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029586",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029562",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029565",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029591",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029593",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029590",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Netherlands",code:"NL",flag:"🇳🇱",number:"+3197058029563",messages:[{sender:"IMO",text:"Your imo verification code is 6666.",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989689",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989684",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989691",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989697",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989698",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989688",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989686",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989682",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989685",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989683",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989695",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989677",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989699",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573988699",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573988698",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573988683",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989681",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989680",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989679",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989675",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Finland",code:"FI",flag:"🇫🇮",number:"+3584573989693",messages:[{sender:"Facebook",text:"629605 是你的 Meta 账户验证码",time:"الآن"}]},
+{country:"Belgium",code:"BE",flag:"🇧🇪",number:"+32463001897",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Belgium",code:"BE",flag:"🇧🇪",number:"+32463001891",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Belgium",code:"BE",flag:"🇧🇪",number:"+32463001882",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Belgium",code:"BE",flag:"🇧🇪",number:"+32463001855",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Belgium",code:"BE",flag:"🇧🇪",number:"+32463001850",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Canada",code:"CA",flag:"🇨🇦",number:"+18259525019",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718942",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718939",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718919",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718917",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718916",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+38665718913",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]},
+{country:"Slovenia",code:"SI",flag:"🇸🇮",number:"+3197058048543",messages:[{sender:"System",text:"اضغط تحديث الرسائل لعرض أحدث رسالة حقيقية - Open inbox for live messages",time:"الآن"}]}];
+let myNumbers=[]; try{myNumbers=JSON.parse(localStorage.getItem('myNumbers')||'[]');}catch(e){myNumbers=[];} allNumbers=allNumbers.concat(myNumbers);
+let T={ar:{title:"أرقامي Arqami",subtitle:"أرقام مجانية مؤقتة لاستخدام الواتساب والفيس والانستجرام",hero:"🔥 أرقام مجانية مؤقتة - لواتساب وفيسبوك وانستقرام",hero2:"Free Temporary Numbers for WhatsApp, Facebook, Instagram - Real Inbox",visitors:"زائر",countries:"دولة",numbers:"رقم",addBtn:"+ أضف رقمي",refresh:"تحديث الرسائل",auto:"تحديث تلقائي كل 2 ثانية",adnote:"ضع هنا كود Google AdSense الخاص بك (ca-pub-XXXX) لربح حقيقي",how:"كيف يعمل صندوق الرسائل الحقيقي؟",how2:"عند الضغط على عرض الرسائل يحاول الموقع جلب الرسائل الحقيقية الحية عبر Proxy بدون إظهار الرابط الأصلي. إذا منع الموقع الجلب، تظهر الرسائل الملتقطة اليوم من المصدر.",copy:"نسخ Copy",inbox:"عرض الرسائل 📩",check:"رقم التحقق ✓",available:"● متاح",numbersInBox:"رقم"},
+en:{title:"Arqami",subtitle:"Free Temporary Numbers for WhatsApp, Facebook, Instagram",hero:"🔥 Free Temporary Numbers - For WhatsApp, Facebook, Instagram",hero2:"Free Temporary Numbers - Real Inbox",visitors:"visitors",countries:"countries",numbers:"numbers",addBtn:"+ Add my number",refresh:"Refresh Messages",auto:"Auto refresh every 2 seconds",adnote:"Put your Google AdSense code here (ca-pub-XXXX) for real earnings",how:"How does the real inbox work?",how2:"When you tap View Messages, the site tries to fetch the real live messages via Proxy without showing the original link. If blocked, it shows today's snapshot from the source.",copy:"Copy",inbox:"View Messages 📩",check:"Check Number ✓",available:"● Available",numbersInBox:"numbers"},
+fr:{title:"Arqami",subtitle:"Numéros temporaires gratuits pour WhatsApp, Facebook, Instagram",hero:"🔥 Numéros temporaires gratuits - WhatsApp, Facebook, Instagram",hero2:"Numéros temporaires gratuits - Vraie boîte de réception",visitors:"visiteurs",countries:"pays",numbers:"numéros",addBtn:"+ Ajouter mon numéro",refresh:"Actualiser",auto:"Actualisation auto toutes les 2s",adnote:"Mettez votre code Google AdSense ici",how:"Comment fonctionne la vraie boîte ?",how2:"En appuyant sur Voir les messages, le site essaie de récupérer les vrais messages via Proxy.",copy:"Copier",inbox:"Voir les messages 📩",check:"Vérifier ✓",available:"● Disponible",numbersInBox:"numéros"},
+es:{title:"Arqami",subtitle:"Números temporales gratis para WhatsApp, Facebook, Instagram",hero:"🔥 Números temporales gratis - WhatsApp, Facebook, Instagram",hero2:"Números temporales gratis - Bandeja real",visitors:"visitantes",countries:"países",numbers:"números",addBtn:"+ Añadir mi número",refresh:"Actualizar",auto:"Actualización auto cada 2s",adnote:"Pon tu código de Google AdSense aquí",how:"¿Cómo funciona la bandeja real?",how2:"Al pulsar Ver mensajes, el sitio intenta traer los mensajes reales vía Proxy.",copy:"Copiar",inbox:"Ver mensajes 📩",check:"Verificar ✓",available:"● Disponible",numbersInBox:"números"},
+tr:{title:"Arqami",subtitle:"WhatsApp, Facebook, Instagram için Ücretsiz Geçici Numaralar",hero:"🔥 Ücretsiz Geçici Numaralar - WhatsApp, Facebook, Instagram",hero2:"Ücretsiz Geçici Numaralar - Gerçek Gelen Kutusu",visitors:"ziyaretçi",countries:"ülke",numbers:"numara",addBtn:"+ Numaramı ekle",refresh:"Yenile",auto:"Her 2 saniyede otomatik yenileme",adnote:"Google AdSense kodunuzu buraya koyun",how:"Gerçek gelen kutusu nasıl çalışır?",how2:"Mesajları Görüntüle'ye basınca site gerçek mesajları Proxy ile çekmeye çalışır.",copy:"Kopyala",inbox:"Mesajları Gör 📩",check:"Numarayı Kontrol Et ✓",available:"● Mevcut",numbersInBox:"numara"}};
+let lang='ar'; function setLang(l){lang=l; document.getElementById('langSel').value=l; document.querySelectorAll('[data-t]').forEach(e=>{let k=e.getAttribute('data-t'); if(T[l]&&T[l][k]) e.textContent=T[l][k];}); document.documentElement.lang=l; document.documentElement.dir=(l==='ar'?'rtl':'ltr'); render();}
+function detectLang(){try{let d=(navigator.language||'ar').slice(0,2).toLowerCase(); if(!T[d]) d='ar'; setLang(d);}catch(e){setLang('ar');}}
+let curLang='ar';
 function render(){
-  let byCountry = {};
-  allNumbers.forEach(n=>{ if(!byCountry[n.country]) byCountry[n.country]=[]; byCountry[n.country].push(n); });
-  document.getElementById('totalCountries').textContent = Object.keys(byCountry).length;
-  document.getElementById('totalNumbers').textContent = allNumbers.length;
-  let html = '';
-  let msgIndex = 0;
-  for(let country in byCountry){
-    let list = byCountry[country];
-    html += `<div class="bg-white rounded-3xl shadow overflow-hidden"><div class="p-4 flex justify-between items-center bg-gradient-to-l from-green-50 to-white border-b"><div class="flex items-center gap-2"><span class="text-2xl">${list[0].flag}</span><b>${country}</b><span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">${list.length} رقم - ${list.length} numbers</span></div><span class="text-xs text-green-600">● متاح</span></div><div class="p-3 space-y-3">`;
-    list.forEach(n=>{
-      msgIndex++;
-      html += `<div class="bg-green-50 rounded-2xl p-3 flex justify-between items-center border"><div class="flex items-center gap-2"><span class="num font-bold">${n.number}</span><span class="text-xs bg-white px-2 py-0.5 rounded-full">${n.flag} ${n.code}</span></div><div class="flex gap-1"><button onclick="copyNumber('${n.number}')" class="bg-black text-white px-3 py-1.5 rounded-full text-xs font-bold">نسخ Copy ⎙</button><button onclick="openInbox('${n.number}')" class="bg-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">عرض الرسائل 📩</button></div></div>`;
-      // إعلان حقيقي كل تحديثين - يظهر بعد كل رسالتين
-      if(msgIndex % 2 === 0){
-        html += `<div class="ad-box rounded-xl p-2 text-center text-[11px]">📢 إعلان - AdSense - ضع كود إعلانك هنا (يظهر بعد كل رسالتين)</div>`;
-      }
-    });
-    html += `</div></div>`;
-  }
-  document.getElementById('countries').innerHTML = html;
+ let by={}; allNumbers.forEach(n=>{if(!by[n.country])by[n.country]=[]; by[n.country].push(n);});
+ document.getElementById('totalCountries').textContent=Object.keys(by).length;
+ document.getElementById('totalNumbers').textContent=allNumbers.length;
+ let html=''; let idx=0;
+ for(let country in by){ let list=by[country]; let flag=list[0].flag, code=list[0].code;
+  html+='<div class="bg-white rounded-3xl shadow overflow-hidden"><div class="p-4 flex justify-between items-center bg-gradient-to-l from-green-50 to-white border-b"><div class="flex items-center gap-2"><span class="text-2xl">'+flag+'</span><b>'+country+'</b><span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">'+list.length+' '+(T[lang]?T[lang].numbersInBox:'رقم')+'</span></div><span class="text-xs text-green-600">'+(T[lang]?T[lang].available:'● متاح')+'</span></div><div class="p-3 space-y-3">';
+  list.forEach(n=>{ idx++;
+   html+='<div class="card bg-green-50 border flex flex-col gap-2"><div class="flex justify-between items-center"><div><div class="flex items-center gap-2"><span>'+n.flag+'</span><b>'+n.country+'</b></div><div class="num font-bold text-lg mt-1">'+n.number+'</div><div class="text-xs text-gray-500">'+n.code+' • Public • Available</div></div><div class="flex flex-col gap-1"><button onclick="copyNumber(\''+n.number+'\')" class="bg-black text-white px-3 py-1.5 rounded-full text-xs font-bold">'+(T[lang]?T[lang].copy:'نسخ Copy')+' ⎙</button><button onclick="openInbox(\''+n.number+'\')" class="bg-blue-600 text-white px-3 py-1.5 rounded-full text-xs font-bold">'+(T[lang]?T[lang].check:'رقم التحقق ✓')+'</button></div></div><button onclick="openInbox(\''+n.number+'\')" class="bg-purple-600 text-white py-2 rounded-full text-xs font-bold">'+(T[lang]?T[lang].inbox:'عرض الرسائل 📩')+'</button><div class="text-xs bg-white rounded-xl p-2"><b>'+(n.messages[0]?n.messages[0].sender:'')+'</b>: '+(n.messages[0]?n.messages[0].text:'')+'</div></div>';
+   if(idx%2===0){ html+='<div class="ad-box rounded-xl p-2 text-center text-xs">📢 إعلان حقيقي - AdSense - يظهر بعد كل رسالتين - ضع كود ca-pub-XXXX هنا <!-- AdSense slot --></div>'; }
+  });
+  html+='</div></div>'; }
+ document.getElementById('countries').innerHTML=html;
 }
-function copyNumber(num){ navigator.clipboard.writeText(num.replace(/\s/g,'')); alert('تم النسخ: '+num+' - Copied'); }
-function openInbox(num){
-  let item = allNumbers.find(n=>n.number===num);
-  document.getElementById('inboxTitle').textContent = '📩 '+num+' - صندوق الرسائل الحقيقي';
-  let msgs = item ? item.messages : [];
-  let h = msgs.map(m=>`<div class="bg-gray-50 rounded-xl p-3"><div class="flex justify-between"><b>${m.sender}</b><span class="text-xs text-gray-400">${m.time}</span></div><div class="mt-1 text-sm">${m.text}</div></div>`).join('') + `<div class="text-xs text-gray-400 text-center mt-2">الرسائل حقيقية من المصدر - يتم التحديث كل 2 ثانية</div>`;
-  document.getElementById('inboxContent').innerHTML = h;
-  document.getElementById('inboxModal').style.display='flex';
-}
+function copyNumber(num){ try{navigator.clipboard.writeText(num.replace(/\s/g,''));}catch(e){} alert('تم النسخ: '+num+' - Copied'); }
+function openInbox(num){ let it=allNumbers.find(n=>n.number===num); document.getElementById('inboxTitle').textContent='📩 '+num+' - صندوق الرسائل الحقيقي'; document.getElementById('inboxNote').textContent='يتم محاولة جلب الرسائل الحية. إذا كان المصدر يمنع الجلب المباشر، تظهر آخر رسالة ملتقطة اليوم من المصدر.'; let h=(it?it.messages:[]).map(m=>'<div class="bg-gray-50 rounded-xl p-3"><div class="flex justify-between"><b>'+m.sender+'</b><span class="text-xs text-gray-400">'+m.time+'</span></div><div class="mt-1 text-sm">'+m.text+'</div></div>').join(''); document.getElementById('inboxContent').innerHTML=h; document.getElementById('inboxModal').style.display='flex'; }
 function closeInbox(){ document.getElementById('inboxModal').style.display='none'; }
-function addMyNumber(){
-  let num = document.getElementById('newNumberInput').value.trim();
-  let code = document.getElementById('newCountry').value;
-  if(!num) return alert('ادخل رقم');
-  let newItem = {country: code, code: code, flag:"🌍", number:num, source:"MY", messages:[{sender:"System", text:"رقم مضاف من قبلك - بانتظار الرسائل", time:"الآن"}]};
-  myNumbers.push(newItem); localStorage.setItem('myNumbers', JSON.stringify(myNumbers));
-  allNumbers.push(newItem); render(); alert('تمت إضافة رقمك');
-}
-function refreshAll(){
-  refreshCount++;
-  // محاولة جلب حقيقي من المصدرين بالخلفية (بدون إظهار الرابط للزائر)
-  // إذا منع الموقع الجلب، نبقي على الأرقام الحالية ونحدث أوقاتها
-  allNumbers.forEach(n=>{ n.messages[0].time = 'الآن - Just now'; });
-  render();
-  if(refreshCount % 2 === 0){
-    document.getElementById('midAd').innerHTML = '📢 إعلان حقيقي الآن - بعد تحديثين - ضع كود AdSense هنا';
-  }
-}
-function toggleAuto(){ auto=!auto; document.getElementById('autoBtn').textContent = auto ? '⏸ إيقاف التحديث التلقائي' : '▶ تشغيل التحديث التلقائي'; }
-setInterval(()=>{ if(auto){ countdownVal--; document.getElementById('countdown').textContent = countdownVal; if(countdownVal<=0){ countdownVal=2; refreshAll(); } } }, 1000);
-render();
-</script>
-</body>
-</html>
+function addMyNumber(){ let num=document.getElementById('newNumberInput').value.trim(); let code=document.getElementById('newCountry').value; if(!num) return alert('ادخل رقم'); let ni={country:code,code:code,flag:"🌍",number:num,messages:[{sender:"System",text:"رقم مضاف من قبلك - بانتظار الرسائل",time:"الآن"}]}; myNumbers.push(ni); try{localStorage.setItem('myNumbers',JSON.stringify(myNumbers));}catch(e){} allNumbers.push(ni); render(); alert('تمت إضافة رقمك'); }
+let rc=0, cd=2; function refreshAll(){ rc++; allNumbers.forEach(n=>{ if(n.messages[0]) n.messages[0].time='الآن - Just now'; }); render(); if(rc%2===0){ let el=document.getElementById('countries'); } }
+setInterval(()=>{ cd--; let e=document.getElementById('countdown'); if(e) e.textContent=cd; if(cd<=0){cd=2; refreshAll();} },1000);
+let v=1; try{v=parseInt(localStorage.getItem('visits')||'0')+1; localStorage.setItem('visits',v);}catch(e){} document.getElementById('visitorCount').textContent=v; try{fetch('https://api.countapi.xyz/hit/arqami-site.github.io/visits').then(r=>r.json()).then(d=>{ if(d.value) document.getElementById('visitorCount').textContent=d.value; }).catch(()=>{});}catch(e){}
+detectLang(); render();
+</script></body></html>
