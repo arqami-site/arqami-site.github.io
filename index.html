@@ -41,7 +41,36 @@ function copyNumber(num){try{navigator.clipboard.writeText(num.replace(/\s/g,'')
 function openInbox(num){let it=allNumbers.find(n=>n.number===num); document.getElementById('inboxTitle').textContent='📩 '+num; let h=(it?it.messages:[]).map(m=>'<div class="bg-gray-50 rounded-xl p-3"><b>'+m.sender+'</b> <span class="text-xs">'+m.time+'</span><div>'+m.text+'</div></div>').join(''); document.getElementById('inboxContent').innerHTML=h; document.getElementById('inboxModal').style.display='flex';}
 function closeInbox(){document.getElementById('inboxModal').style.display='none';}
 function addMyNumber(){let num=document.getElementById('newNumberInput').value.trim(); let code=document.getElementById('newCountry').value; if(!num) return alert('ادخل رقم'); let ni={country:code,code:code,flag:'🌍',number:num,messages:[{sender:'System',text:'رقم مضاف من قبلك',time:'الآن'}]}; myNumbers.push(ni); try{localStorage.setItem('myNumbers',JSON.stringify(myNumbers));}catch(e){} allNumbers.push(ni); render(); alert('تمت إضافة رقمك');}
-let rc=0, cd=2; function refreshAll(){rc++; allNumbers.forEach(n=>{if(n.messages[0]) n.messages[0].time='الآن - Just now';}); render();}
+const PROXY = "https://api.allorigins.win/raw?url=";
+let rc=0, cd=2;
+async function getRealMessages(num){
+  try{
+    const clean = num.replace(/[^0-9]/g,"");
+    const r = await fetch(PROXY + encodeURIComponent("https://receive-sms-free.cc/"));
+    const t = await r.text();
+    const idx = t.indexOf(clean.slice(-6));
+    if(idx > -1) return [{sender:"Live", text: t.slice(Math.max(0, idx-100), idx+300).replace(/<[^>]+>/g," ").slice(0,300), time:"الآن"}];
+  }catch(e){}
+  return null;
+}
+async function refreshAll(){
+  rc++;
+  for(let n of allNumbers){
+    const m = await getRealMessages(n.number);
+    if(m) n.messages = m;
+  }
+  render();
+}
+async function openInbox(num){
+  let it = allNumbers.find(n=>n.number===num);
+  document.getElementById('inboxTitle').textContent='📩 '+num;
+  document.getElementById('inboxContent').innerHTML='<div>⏳ جاري جلب الرسائل الحقيقية...</div>';
+  document.getElementById('inboxModal').style.display='flex';
+  const m = await getRealMessages(num);
+  if(m) it.messages = m;
+  let h=(it?it.messages:[]).map(x=>'<div class="bg-gray-50 rounded-xl p-3"><b>'+x.sender+'</b> <span class="text-xs">'+x.time+'</span><div>'+x.text+'</div></div>').join('');
+  document.getElementById('inboxContent').innerHTML=h;
+}
 setInterval(()=>{cd--; let e=document.getElementById('countdown'); if(e) e.textContent=cd; if(cd<=0){cd=2; refreshAll();}},1000);
 let v=1; try{v=parseInt(localStorage.getItem('visits')||'0')+1; localStorage.setItem('visits',v);}catch(e){} document.getElementById('visitorCount').textContent=v;
 detectLang(); render();
