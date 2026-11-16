@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>أرقامي PRO - أرقام مؤقتة واستقبال الرسائل</title>
+<title>أرقامي PRO - أرقام مؤقتة واستقبال الرسائل الحقيقية</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
     *{box-sizing:border-box}
@@ -14,6 +14,7 @@
     .card:hover{background:#f1f3f5}
     .num{font-weight:bold;direction:ltr;font-size:18px;color:#0d6efd}
     .btn-copy{background:#198754;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:bold;cursor:pointer}
+    .btn-refresh{background:#0d6efd;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:bold;cursor:pointer;margin-right:5px}
     .back-btn{display:inline-block;margin-bottom:15px;color:#0d6efd;font-weight:bold;cursor:pointer;text-decoration:none}
     .message-box{background:#fff;border-radius:12px;padding:15px;margin-bottom:10px;border-right:5px solid #198754;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
     .small-text{font-size:13px;color:#6c757d}
@@ -22,68 +23,80 @@
 <body>
 
 <div class="top">
-    ⚡ أرقامي PRO - رسائل حصرية
+    ⚡ أرقامي PRO - جلب الرسائل الفورية
 </div>
 
 <div class="wrap" id="app">
-    <!-- سيتم تعبئة البيانات هنا تلقائياً -->
-    <div style="text-align:center; padding:40px;">جاري تحميل الأرقام...</div>
+    <div style="text-align:center; padding:40px;">جاري تحميل الأرقام والدول...</div>
 </div>
 
 <script>
-    // بيانات الأرقام والرسائل (يمكنك ربطها لاحقاً بملف numbers.json)
-    const data = [
-        {
-            country: "الولايات المتحدة الأمريكية", flag: "🇺🇸",
-            numbers: [
-                { num: "+14075449125", messages: [{ sender: "WhatsApp", text: "رمز تحقيق واتساب الخاص بك: 123-456", time: "منذ دقيقة" }] },
-                { num: "+14132784571", messages: [{ sender: "Google", text: "رمز تأكيد حسابك على جوجل هو: 987654", time: "منذ 5 دقائق" }] }
-            ]
-        },
-        {
-            country: "هولندا", flag: "🇳🇱",
-            numbers: [
-                { num: "+3197058029579", messages: [{ sender: "TikTok", text: "[TikTok] 2144 is your verification code.", time: "منذ 3 دقائق" }] }
-            ]
-        },
-        {
-            country: "فنلندا", flag: "🇫🇮",
-            numbers: [
-                { num: "+3584573989689", messages: [{ sender: "Facebook", text: "859951 es tu codigo de confirmacion de Meta.", time: "منذ 10 دقائق" }] }
-            ]
-        }
-    ];
+    // جميع الدول والأرقام
+    const rawData = `United States|US|🇺🇸|+14075449125,+14132784571,+12244010289,+13865168445,+12138787418,+12138787429,+12093750316,+12093750341,+12138787279,+16804441576,+12543207587,+12543207584,+12543207586,+12543207588,+12543207583,+12543207600,+12543207590,+12543207595,+12543207596,+12543207592,+12543207585,+12543207589
+Netherlands|NL|🇳🇱|+3197058029579,+3197058029581,+3197058029557,+3197058029570,+3197058029578,+3197058029558,+3197058029560,+3197058029599,+3197058029567,+3197058029585,+3197058029580,+3197058029587,+3197058029597,+3197058029568,+3197058029586,+3197058029562,+3197058029565,+3197058029591,+3197058029593,+3197058029590,+3197058029563,+3197058046051,+3197058046041,+3197058046085,+3197058049101,+3197058045089,+3197058049050,+3197058049095,+3197010588915,+3197058049264,+3197010536179
+Finland|FI|🇫🇮|+3584573989689,+3584573989684,+3584573989691,+3584573989697,+3584573989698,+3584573989688,+3584573989686,+3584573989682,+3584573989685,+3584573989683,+3584573989695,+3584573989677,+3584573989699,+3584573988699,+3584573988698,+3584573988683,+3584573989681,+3584573989680,+3584573989679,+3584573989675,+3584573989693,+3580417919490,+3584573987293,+3584573968511,+3584573999339,+3584573985604,+3584573986589,+3584573985462,+3584573985561,+3584573983830,+3584573985600,+3584573999325,+3584573983809,+3584573988987,+3584573988993,+3584573988995,+3584573988989,+3584573988992,+3584573988986,+3584573988991,+3584573988982,+3584573988997,+3584573988999
+Belgium|BE|🇧🇪|+32463001897,+32463001891,+32463001882,+32463001855,+32463001850,+32463001318,+32463001329,+32463001374
+Canada|CA|🇨🇦|+18259525019,+17054132165,+15484836910,+17052309906,+13438037735,+12363025868,+19029045978,+15818059064,+14184311109,+15874242509,+12363045267
+Slovenia|SI|🇸🇮|+38665718942,+38665718939,+38665718919,+38665718917,+38665718916,+38665718913,+3197058048543,+38665708115
+Ukraine|UA|🇺🇦|+380673382170,+380971463459
+China|CN|🇨🇳|+8617051989288,+8616521681192,+8616721919237,+8617108479445
+Kazakhstan|KZ|🇰🇿|+77078394575`;
+
+    let countriesData = [];
+    let currentNumber = null;
+    const PROXY = "https://api.allorigins.win/raw?url=";
+
+    function parseData() {
+        rawData.trim().split('\n').forEach(line => {
+            let parts = line.split('|');
+            if(parts.length >= 4) {
+                let countryName = parts[0];
+                let flag = parts[2];
+                let nums = parts[3].split(',').map(n => ({
+                    num: n.trim(),
+                    messages: [{ sender: "System", text: "اضغط على 'تحديث الرسائل' لجلب الرسائل الواردة مباشرة", time: "الآن" }]
+                }));
+                countriesData.push({ country: countryName, flag: flag, numbers: nums });
+            }
+        });
+    }
 
     function renderCountries() {
-        let html = '<h3 style="margin-bottom:15px;">اختر الدولة لعرض الأرقام المتاحة:</h3>';
-        data.forEach((item, cIndex) => {
+        let totalNums = countriesData.reduce((acc, curr) => acc + curr.numbers.length, 0);
+        let html = `<h3 style="margin-bottom:15px;">اختر الدولة (${countriesData.length} دولة - ${totalNums} رقم متاح):</h3>`;
+        
+        countriesData.forEach((item, cIndex) => {
             html += `
                 <div class="card" onclick="renderNumbers(${cIndex})">
                     <div>
                         <span style="font-size:22px;">${item.flag}</span> 
                         <b style="font-size:16px; margin-right:8px;">${item.country}</b>
                     </div>
-                    <span class="small-text" style="background:#e9ecef; padding:5px 10px; border-radius:20px;">${item.numbers.length} رقم متاح</span>
+                    <span class="small-text" style="background:#e9ecef; padding:5px 10px; border-radius:20px;">${item.numbers.length} رقم</span>
                 </div>
             `;
         });
         document.getElementById('app').innerHTML = html;
     }
 
+    let activeCountryIndex = 0;
     function renderNumbers(cIndex) {
-        let countryObj = data[cIndex];
+        activeCountryIndex = cIndex;
+        let countryObj = countriesData[cIndex];
         let html = `<a class="back-btn" onclick="renderCountries()">← العودة لقائمة الدول</a>`;
         html += `<h2>${countryObj.flag} أرقام دولة ${countryObj.country}</h2>`;
         
-        countryObj.numbers.forEach((numObj, nIndex) => {
+        countryObj.numbers.forEach((numObj) => {
             html += `
                 <div class="card" style="display:block;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                         <span class="num">${numObj.num}</span>
-                        <button class="btn-copy" onclick="copyNum('${numObj.num}')">📋 نسخ الرقم</button>
+                        <div>
+                            <button class="btn-refresh" onclick="fetchMessages('${numObj.num}')">🔄 جلب الرسائل</button>
+                            <button class="btn-copy" onclick="copyNum('${numObj.num}')">📋 نسخ</button>
+                        </div>
                     </div>
-                    <hr style="border:0; border-top:1px solid #eee; margin:10px 0;">
-                    <div style="font-weight:bold; font-size:14px; margin-bottom:5px;">آخر الرسائل الواردة:</div>
+                    <div id="msg-${numObj.num.replace('+', '')}">
             `;
             
             numObj.messages.forEach(msg => {
@@ -98,10 +111,57 @@
                 `;
             });
             
-            html += `</div>`;
+            html += `</div></div>`;
         });
 
         document.getElementById('app').innerHTML = html;
+    }
+
+    async function fetchMessages(num) {
+        let cleanNum = num.replace(/[^0-9]/g, '');
+        let containerId = 'msg-' + cleanNum;
+        let box = document.getElementById(containerId);
+        if(box) box.innerHTML = '<div class="message-box">جاري جلب الرسائل الحقيقية من الشبكة...</div>';
+
+        try {
+            // رابط جلب الرسائل الأساسي عبر الـ Proxy
+            let target = atob('aHR0cHM6Ly9nZXRmcmVlc21zbnVtYmVyLmNvbS92aXJ0dWFsLXBob25lL3At') + cleanNum;
+            let res = await fetch(PROXY + encodeURIComponent(target));
+            let htmlText = await res.text();
+
+            // تنظيف النص واستخراج الرسائل
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(htmlText, 'text/html');
+            let textContent = doc.body.textContent || "";
+
+            if(textContent.length > 200) {
+                // استخراج الأكواد أو الرسائل التي تحتوي على كلمات مفتاحية
+                let lines = textContent.split('\n').map(l => l.trim()).filter(l => l.length > 10);
+                let foundMsgs = [];
+                lines.forEach(l => {
+                    if(/code|رمز|verification|whatsapp|telegram|google|facebook|imo|tiktok/i.test(l)) {
+                        if(!foundMsgs.includes(l) && foundMsgs.length < 5) foundMsgs.push(l);
+                    }
+                });
+
+                if(foundMsgs.length > 0) {
+                    let htmlRes = '';
+                    foundMsgs.forEach(m => {
+                        htmlRes += `
+                            <div class="message-box" style="border-right-color: #0d6efd;">
+                                <div style="color:#0d6efd; font-weight:bold; font-size:13px;">رسالة واردة حقيقية</div>
+                                <div style="margin-top:5px; font-size:14px; direction:ltr; text-align:right;">${m}</div>
+                            </div>
+                        `;
+                    });
+                    box.innerHTML = htmlRes;
+                    return;
+                }
+            }
+            box.innerHTML = '<div class="message-box">لا توجد رسائل جديدة حالياً على هذا الرقم، جرب لاحقاً.</div>';
+        } catch(e) {
+            box.innerHTML = '<div class="message-box">تعذر الاتصال بمصدر الرسائل، تأكد من الاتصال بالإنترنت.</div>';
+        }
     }
 
     function copyNum(text) {
@@ -109,7 +169,7 @@
         alert("تم نسخ الرقم بنجاح: " + text);
     }
 
-    // تشغيل العرض عند فتح الصفحة
+    parseData();
     renderCountries();
 </script>
 
