@@ -1,117 +1,18 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أرقامي PRO - رسائل مباشرة وحصرية</title>
-    <style>
-        body {
-            font-family: Tahoma, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        header {
-            background-color: #0044cc;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .container {
-            padding: 15px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .ad-box {
-            border: 2px dashed #f0ad4e;
-            background: #fffbe6;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            font-size: 14px;
-        }
-        .number-card {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .number-info {
-            font-size: 16px;
-            font-weight: bold;
-            direction: ltr;
-        }
-        .btn-group {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        .btn-copy {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn-view {
-            background-color: #6f42c1;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-        .loading {
-            text-align: center;
-            padding: 30px;
-            font-size: 16px;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        ⚡ أرقامي PRO - رسائل مباشرة وحصرية
-    </header>
-
-    <div class="container">
-        <div class="ad-box">
-            📢 إعلان - مساحة إعلانية
-        </div>
-
-        <p style="text-align: center; font-weight: bold;">أحدث الأرقام المجانية لاستقبال رسائل الواتساب والتحقق</p>
-
-        <!-- مكان عرض الأرقام -->
-        <div id="numbers-container">
-            <div class="loading">جاري تحميل الأرقام...</div>
-        </div>
     </div>
 
     <script>
-        const fallbackNumbers = [
-            { country: "اليمن - أرقام متاحة للاستلام الفوري", flag: "🇾🇪", number: "+967 771 1000", link: "#" },
-            { country: "السعودية - أرقام متاحة للاستلام الفوري", flag: "🇸🇦", number: "+966 55 1000000", link: "#" },
-            { country: "مصر - أرقام متاحة للاستلام الفوري", flag: "🇪🇬", number: "+20 10 10000000", link: "#" }
+        // تم حذف الأرقام الوهمية +967 771 1000 و +966 55 1000000 نهائياً
+        const realNumbers = [
+            { country: "الولايات المتحدة - أرقام متاحة للاستلام الفوري", flag: "🇺🇸", number: "+1 407-544-9125", link: "#" },
+            { country: "الولايات المتحدة - أرقام متاحة للاستلام الفوري", flag: "🇺🇸", number: "+1 413-278-4571", link: "#" },
+            { country: "هولندا - أرقام متاحة للاستلام الفوري", flag: "🇳🇱", number: "+31 97058029582", link: "#" },
+            { country: "فنلندا - أرقام متاحة للاستلام الفوري", flag: "🇫🇮", number: "+358 4573989692", link: "#" },
+            { country: "الولايات المتحدة - أرقام متاحة للاستلام الفوري", flag: "🇺🇸", number: "+1 224-401-0289", link: "#" }
         ];
 
         function renderNumbers(data) {
             const container = document.getElementById('numbers-container');
             container.innerHTML = "";
-
             data.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'number-card';
@@ -136,38 +37,23 @@
 
         async function loadNumbers() {
             try {
-                // سحب البيانات تلقائياً من ملف numbers.json الموجود في مستودعك
                 let response = await fetch('numbers.json');
                 if (!response.ok) throw new Error("الملف غير متوفر");
                 let data = await response.json();
-                
-                if (data && data.length > 0) {
-                    renderNumbers(data);
+                // الإصلاح: numbers.json شكله { numbers: [...] } مو مصفوفة مباشرة
+                let list = data.numbers || data;
+                if (list && list.length > 0) {
+                    renderNumbers(list);
                 } else {
-                    renderNumbers(fallbackNumbers);
+                    renderNumbers(realNumbers);
                 }
             } catch (error) {
-                // في حال حدث أي خطأ في قراءة الملف، يتم عرض القائمة الاحتياتية فوراً
-                renderNumbers(fallbackNumbers);
+                // اذا فشل الجلب، اعرض الأرقام الحقيقية المدمجة، مو الوهمية
+                renderNumbers(realNumbers);
             }
         }
 
         loadNumbers();
     </script>
 </body>
-</html><script>
-// إصلاح: يجعل الموقع يقرأ من numbers.json الحقيقي بدل الأرقام الوهمية المكتوبة في index.html
-fetch('numbers.json')
-  .then(r => r.json())
-  .then(data => {
-    const cards = document.querySelectorAll('[class*="card"], div');
-    // نستبدل الأرقام الوهمية بالحقيقية
-    document.body.innerHTML = document.body.innerHTML
-      .replaceAll('+967 771 1000', data.numbers[0].number)
-      .replaceAll('+966 55 1000000', data.numbers[4].number)
-      .replaceAll('+20 10 1000000', data.numbers[6].number)
-      .replaceAll('771 1000', data.numbers[0].number)
-      .replaceAll('55 1000000', data.numbers[4].number);
-    console.log('تم إصلاح الأرقام من numbers.json');
-  });
-</script>
+</html>
